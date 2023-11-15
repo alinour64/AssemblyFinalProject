@@ -52,7 +52,7 @@ void printArray( ) {
 	 printf( "%x = %x(%d)\n",
 		 a2m( i ), *(int *)&array[i], *(int *)&array[i] ); 
 }
-
+ 
 /*
  * _ralloc is _kalloc's helper function that is recursively called to
  * allocate a requested space, using the buddy memory allocaiton algorithm.
