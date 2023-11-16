@@ -8,7 +8,6 @@
  * The following global variables are used to simulate memory allocation
  * Cortex-M's SRAM space.
  */
- KALB
 // Heap
 char array[0x8000];            // simulate SRAM: 0x2000.0000 - 0x2000.7FFF
 int heap_top   = 0x20001000;   // the top of heap space
