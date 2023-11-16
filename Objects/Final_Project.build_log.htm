@@ -1,0 +1,683 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.38.0.0
+Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Kaleb Vandel, University of Washington Bothell, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.38.0.0
+Toolchain Path:  C:\Users\kaleb\Desktop\Code\Keil\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.19
+Assembler:       Armasm.exe V6.19
+Linker/Locator:  ArmLink.exe V6.19
+Library Manager: ArmAr.exe V6.19
+Hex Converter:   FromElf.exe V6.19
+CPU DLL:         SARMCM3.DLL V5.38.0.0
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      UL2CM3.DLL V1.164.8.0
+Dialog DLL:      TCM.DLL V1.56.4.0
+ 
+<h2>Project:</h2>
+C:\Users\kaleb\Desktop\Code\Computer Science\CSS 422\AssemblyFinalProject\Final_Project.uvprojx
+Project File Date:  11/15/2023
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.19', folder: 'C:\Users\kaleb\Desktop\Code\Keil\ARM\ARMCLANG\Bin'
+Build target 'Target 1'
+Note: source file '.\Assembly_Final_Project_Files\Thumb2_Programs\heap_template.s' - object file renamed from '.\Objects\heap_template.o' to '.\Objects\heap_template_1.o'.
+Note: source file '.\Assembly_Final_Project_Files\Thumb2_Programs\heap_template.s' - object file renamed from '.\Objects\heap_template.o' to '.\Objects\heap_template_1.o'.
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(12): warning: // comments are not allowed in this language [-Wcomment]
+#include <string.h> // bzero, strncpy
+                    ^
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(15): error: 'unistd.h' file not found
+#include <unistd.h>  // alarm
+         ^~~~~~~~~~
+1 warning and 1 error generated.
+compiling driver_cpg.c...
+Assembly_Final_Project_Files/C_Programs/driver.c(6): warning: // comments are not allowed in this language [-Wcomment]
+#include <string.h> // bzero, strncpy
+                    ^
+Assembly_Final_Project_Files/C_Programs/driver.c(9): error: 'unistd.h' file not found
+#include <unistd.h>  // alarm
+         ^~~~~~~~~~
+1 warning and 1 error generated.
+compiling driver.c...
+Assembly_Final_Project_Files/C_Programs/heap_template.c(5): warning: // comments are not allowed in this language [-Wcomment]
+#include <stdio.h> // printf
+                   ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(13): warning: no previous extern declaration for non-static variable 'heap_top' [-Wmissing-variable-declarations]
+int heap_top   = 0x20001000;   // the top of heap space
+    ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(13): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int heap_top   = 0x20001000;   // the top of heap space
+^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(14): warning: no previous extern declaration for non-static variable 'heap_bot' [-Wmissing-variable-declarations]
+int heap_bot   = 0x20004FE0;   // the address of the last 32B in heap
+    ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(14): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int heap_bot   = 0x20004FE0;   // the address of the last 32B in heap
+^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(15): warning: no previous extern declaration for non-static variable 'max_size' [-Wmissing-variable-declarations]
+int max_size   = 0x00004000;   // maximum allocation: 16KB = 2^14
+    ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(15): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int max_size   = 0x00004000;   // maximum allocation: 16KB = 2^14
+^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(16): warning: no previous extern declaration for non-static variable 'min_size' [-Wmissing-variable-declarations]
+int min_size   = 0x00000020;   // minimum allocation: 32B = 2^5
+    ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(16): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int min_size   = 0x00000020;   // minimum allocation: 32B = 2^5
+^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(19): warning: no previous extern declaration for non-static variable 'mcb_top' [-Wmissing-variable-declarations]
+int mcb_top    = 0x20006800;   // the top of MCB
+    ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(19): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int mcb_top    = 0x20006800;   // the top of MCB
+^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(20): warning: no previous extern declaration for non-static variable 'mcb_bot' [-Wmissing-variable-declarations]
+int mcb_bot    = 0x20006BFE;   // the address of the last MCB entry
+    ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(20): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int mcb_bot    = 0x20006BFE;   // the address of the last MCB entry
+^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(21): warning: no previous extern declaration for non-static variable 'mcb_ent_sz' [-Wmissing-variable-declarations]
+int mcb_ent_sz = 0x00000002;   // 2B per MCB entry
+    ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(21): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int mcb_ent_sz = 0x00000002;   // 2B per MCB entry
+^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(22): warning: no previous extern declaration for non-static variable 'mcb_total' [-Wmissing-variable-declarations]
+int mcb_total  = 512;          // # MCB entries: 2^9 = 512 entries
+    ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(22): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int mcb_total  = 512;          // # MCB entries: 2^9 = 512 entries
+^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(29): warning: no previous prototype for function 'm2a' [-Wmissing-prototypes]
+int m2a( int sram_addr ) {
+    ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(29): note: declare 'static' if the function is not intended to be used outside of this translation unit
+int m2a( int sram_addr ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/heap_template.c(40): warning: no previous prototype for function 'a2m' [-Wmissing-prototypes]
+int a2m( int array_index ) {
+    ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(40): note: declare 'static' if the function is not intended to be used outside of this translation unit
+int a2m( int array_index ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/heap_template.c(48): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+void printArray( ) {
+               ^
+                 void
+Assembly_Final_Project_Files/C_Programs/heap_template.c(50): warning: variable declaration in for loop is a C99-specific feature [-Wc99-extensions]
+  for ( int i = 0; i < 0x8000; i+=4 )
+        ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(50): warning: GCC does not allow variable declarations in for loop initializers before C99 [-Wgcc-compat]
+Assembly_Final_Project_Files/C_Programs/heap_template.c(53): warning: cast from 'char *' to 'int *' increases required alignment from 1 to 4 [-Wcast-align]
+                 a2m( i ), *(int *)&array[i], *(int *)&array[i] ); 
+                            ^~~~~~~~~~~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap_template.c(53): warning: cast from 'char *' to 'int *' increases required alignment from 1 to 4 [-Wcast-align]
+                 a2m( i ), *(int *)&array[i], *(int *)&array[i] ); 
+                                               ^~~~~~~~~~~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap_template.c(48): warning: no previous prototype for function 'printArray' [-Wmissing-prototypes]
+void printArray( ) {
+     ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(48): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void printArray( ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/heap_template.c(70): warning: unused parameter 'size' [-Wunused-parameter]
+void *_ralloc( int size, int left, int right ) {
+                   ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(70): warning: unused parameter 'left' [-Wunused-parameter]
+void *_ralloc( int size, int left, int right ) {
+                             ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(70): warning: unused parameter 'right' [-Wunused-parameter]
+void *_ralloc( int size, int left, int right ) {
+                                       ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(70): warning: no previous prototype for function '_ralloc' [-Wmissing-prototypes]
+void *_ralloc( int size, int left, int right ) {
+      ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(70): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void *_ralloc( int size, int left, int right ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/heap_template.c(84): warning: no previous prototype for function '_rfree' [-Wmissing-prototypes]
+int _rfree( int mcb_addr ) {
+    ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(84): note: declare 'static' if the function is not intended to be used outside of this translation unit
+int _rfree( int mcb_addr ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/heap_template.c(96): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+void _kinit( ) {
+           ^
+             void
+Assembly_Final_Project_Files/C_Programs/heap_template.c(98): warning: variable declaration in for loop is a C99-specific feature [-Wc99-extensions]
+  for ( int i = 0x20001000; i < 0x20005000; i++ )
+        ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(98): warning: GCC does not allow variable declarations in for loop initializers before C99 [-Wgcc-compat]
+Assembly_Final_Project_Files/C_Programs/heap_template.c(102): warning: cast from 'char *' to 'short *' increases required alignment from 1 to 2 [-Wcast-align]
+  *(short *)&array[ m2a( mcb_top ) ] = max_size;
+   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap_template.c(102): warning: implicit conversion loses integer precision: 'int' to 'short' [-Wimplicit-int-conversion]
+  *(short *)&array[ m2a( mcb_top ) ] = max_size;
+                                     ~ ^~~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap_template.c(104): warning: variable declaration in for loop is a C99-specific feature [-Wc99-extensions]
+  for ( int i = 0x20006804; i < 0x20006C00; i += 2 ) {
+        ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(104): warning: GCC does not allow variable declarations in for loop initializers before C99 [-Wgcc-compat]
+Assembly_Final_Project_Files/C_Programs/heap_template.c(104): error: redefinition of 'i'
+  for ( int i = 0x20006804; i < 0x20006C00; i += 2 ) {
+            ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(98): note: previous definition is here
+  for ( int i = 0x20001000; i < 0x20005000; i++ )
+            ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(96): warning: no previous prototype for function '_kinit' [-Wmissing-prototypes]
+void _kinit( ) {
+     ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(96): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void _kinit( ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/heap_template.c(116): warning: no previous prototype for function '_kalloc' [-Wmissing-prototypes]
+void *_kalloc( int size ) {
+      ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(116): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void *_kalloc( int size ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/heap_template.c(136): warning: mixing declarations and code is a C99 extension [-Wdeclaration-after-statement]
+  int mcb_addr =  mcb_top + ( addr - heap_top ) / 16;
+      ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(127): warning: no previous prototype for function '_kfree' [-Wmissing-prototypes]
+void *_kfree( void *ptr ) {
+      ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(127): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void *_kfree( void *ptr ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/heap_template.c(151): warning: no previous prototype for function '_malloc' [-Wmissing-prototypes]
+void *_malloc( int size ) {
+      ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(151): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void *_malloc( int size ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/heap_template.c(167): warning: no previous prototype for function '_free' [-Wmissing-prototypes]
+void *_free( void *ptr ) {
+      ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(167): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void *_free( void *ptr ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/heap_template.c(12): warning: no previous extern declaration for non-static variable 'array' [-Wmissing-variable-declarations]
+char array[0x8000];            // simulate SRAM: 0x2000.0000 - 0x2000.7FFF
+     ^
+Assembly_Final_Project_Files/C_Programs/heap_template.c(12): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+char array[0x8000];            // simulate SRAM: 0x2000.0000 - 0x2000.7FFF
+^
+36 warnings and 1 error generated.
+compiling heap_template.c...
+Assembly_Final_Project_Files/C_Programs/heap.c(5): warning: // comments are not allowed in this language [-Wcomment]
+#include <stdio.h> // printf
+                   ^
+Assembly_Final_Project_Files/C_Programs/heap.c(13): warning: no previous extern declaration for non-static variable 'heap_top' [-Wmissing-variable-declarations]
+int heap_top   = 0x20001000;   // the top of heap space
+    ^
+Assembly_Final_Project_Files/C_Programs/heap.c(13): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int heap_top   = 0x20001000;   // the top of heap space
+^
+Assembly_Final_Project_Files/C_Programs/heap.c(14): warning: no previous extern declaration for non-static variable 'heap_bot' [-Wmissing-variable-declarations]
+int heap_bot   = 0x20004FE0;   // the address of the last 32B in heap
+    ^
+Assembly_Final_Project_Files/C_Programs/heap.c(14): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int heap_bot   = 0x20004FE0;   // the address of the last 32B in heap
+^
+Assembly_Final_Project_Files/C_Programs/heap.c(15): warning: no previous extern declaration for non-static variable 'max_size' [-Wmissing-variable-declarations]
+int max_size   = 0x00004000;   // maximum allocation: 16KB = 2^14
+    ^
+Assembly_Final_Project_Files/C_Programs/heap.c(15): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int max_size   = 0x00004000;   // maximum allocation: 16KB = 2^14
+^
+Assembly_Final_Project_Files/C_Programs/heap.c(16): warning: no previous extern declaration for non-static variable 'min_size' [-Wmissing-variable-declarations]
+int min_size   = 0x00000020;   // minimum allocation: 32B = 2^5
+    ^
+Assembly_Final_Project_Files/C_Programs/heap.c(16): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int min_size   = 0x00000020;   // minimum allocation: 32B = 2^5
+^
+Assembly_Final_Project_Files/C_Programs/heap.c(19): warning: no previous extern declaration for non-static variable 'mcb_top' [-Wmissing-variable-declarations]
+int mcb_top    = 0x20006800;   // the top of MCB
+    ^
+Assembly_Final_Project_Files/C_Programs/heap.c(19): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int mcb_top    = 0x20006800;   // the top of MCB
+^
+Assembly_Final_Project_Files/C_Programs/heap.c(20): warning: no previous extern declaration for non-static variable 'mcb_bot' [-Wmissing-variable-declarations]
+int mcb_bot    = 0x20006BFE;   // the address of the last MCB entry
+    ^
+Assembly_Final_Project_Files/C_Programs/heap.c(20): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int mcb_bot    = 0x20006BFE;   // the address of the last MCB entry
+^
+Assembly_Final_Project_Files/C_Programs/heap.c(21): warning: no previous extern declaration for non-static variable 'mcb_ent_sz' [-Wmissing-variable-declarations]
+int mcb_ent_sz = 0x00000002;   // 2B per MCB entry
+    ^
+Assembly_Final_Project_Files/C_Programs/heap.c(21): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int mcb_ent_sz = 0x00000002;   // 2B per MCB entry
+^
+Assembly_Final_Project_Files/C_Programs/heap.c(22): warning: no previous extern declaration for non-static variable 'mcb_total' [-Wmissing-variable-declarations]
+int mcb_total  = 512;          // # MCB entries: 2^9 = 512 entries
+    ^
+Assembly_Final_Project_Files/C_Programs/heap.c(22): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int mcb_total  = 512;          // # MCB entries: 2^9 = 512 entries
+^
+Assembly_Final_Project_Files/C_Programs/heap.c(29): warning: no previous prototype for function 'm2a' [-Wmissing-prototypes]
+int m2a( int sram_addr ) {
+    ^
+Assembly_Final_Project_Files/C_Programs/heap.c(29): note: declare 'static' if the function is not intended to be used outside of this translation unit
+int m2a( int sram_addr ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/heap.c(40): warning: no previous prototype for function 'a2m' [-Wmissing-prototypes]
+int a2m( int array_index ) {
+    ^
+Assembly_Final_Project_Files/C_Programs/heap.c(40): note: declare 'static' if the function is not intended to be used outside of this translation unit
+int a2m( int array_index ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/heap.c(48): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+void printArray( ) {
+               ^
+                 void
+Assembly_Final_Project_Files/C_Programs/heap.c(50): warning: variable declaration in for loop is a C99-specific feature [-Wc99-extensions]
+  for ( int i = 0; i < 0x8000; i+=4 )
+        ^
+Assembly_Final_Project_Files/C_Programs/heap.c(50): warning: GCC does not allow variable declarations in for loop initializers before C99 [-Wgcc-compat]
+Assembly_Final_Project_Files/C_Programs/heap.c(53): warning: cast from 'char *' to 'int *' increases required alignment from 1 to 4 [-Wcast-align]
+                 a2m( i ), *(int *)&array[i], *(int *)&array[i] ); 
+                            ^~~~~~~~~~~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap.c(53): warning: cast from 'char *' to 'int *' increases required alignment from 1 to 4 [-Wcast-align]
+                 a2m( i ), *(int *)&array[i], *(int *)&array[i] ); 
+                                               ^~~~~~~~~~~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap.c(48): warning: no previous prototype for function 'printArray' [-Wmissing-prototypes]
+void printArray( ) {
+     ^
+Assembly_Final_Project_Files/C_Programs/heap.c(48): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void printArray( ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/heap.c(86): warning: declaration shadows a local variable [-Wshadow]
+    void* heap_addr = _ralloc( size, left, midpoint - mcb_ent_sz );
+          ^
+Assembly_Final_Project_Files/C_Programs/heap.c(76): note: previous declaration is here
+  int heap_addr = NULL;
+      ^
+Assembly_Final_Project_Files/C_Programs/heap.c(94): warning: cast from 'char *' to 'short *' increases required alignment from 1 to 2 [-Wcast-align]
+      *(short *)&array[ m2a( midpoint ) ] = act_half_size;
+       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap.c(94): warning: implicit conversion loses integer precision: 'int' to 'short' [-Wimplicit-int-conversion]
+      *(short *)&array[ m2a( midpoint ) ] = act_half_size;
+                                          ~ ^~~~~~~~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap.c(105): warning: cast from 'char *' to 'short *' increases required alignment from 1 to 2 [-Wcast-align]
+      if ( *(short *)&array[ m2a( left ) ] < act_entire_size )
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap.c(108): warning: cast from 'char *' to 'short *' increases required alignment from 1 to 2 [-Wcast-align]
+      *(short *)&array[ m2a( left ) ] = act_entire_size | 0x01;
+       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap.c(108): warning: implicit conversion loses integer precision: 'int' to 'short' [-Wimplicit-int-conversion]
+      *(short *)&array[ m2a( left ) ] = act_entire_size | 0x01;
+                                      ~ ~~~~~~~~~~~~~~~~^~~~~~
+Assembly_Final_Project_Files/C_Programs/heap.c(76): warning: unused variable 'heap_addr' [-Wunused-variable]
+  int heap_addr = NULL;
+      ^
+Assembly_Final_Project_Files/C_Programs/heap.c(70): warning: no previous prototype for function '_ralloc' [-Wmissing-prototypes]
+void *_ralloc( int size, int left, int right ) {
+      ^
+Assembly_Final_Project_Files/C_Programs/heap.c(70): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void *_ralloc( int size, int left, int right ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/heap.c(130): warning: cast from 'char *' to 'short *' increases required alignment from 1 to 2 [-Wcast-align]
+  short mcb_contents = *(short *)&array[ m2a( mcb_addr ) ];
+                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap.c(136): warning: cast from 'char *' to 'short *' increases required alignment from 1 to 2 [-Wcast-align]
+  *(short *)&array[ m2a( mcb_addr ) ] = mcb_contents;
+   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap.c(153): warning: cast from 'char *' to 'short *' increases required alignment from 1 to 2 [-Wcast-align]
+      short mcb_buddy = *(short *)&array[ m2a( mcb_addr + mcb_chunk ) ];
+                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap.c(168): warning: cast from 'char *' to 'short *' increases required alignment from 1 to 2 [-Wcast-align]
+          *(short *)&array[ m2a( mcb_addr + mcb_chunk ) ] = 0; // clear my buddy
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap.c(170): warning: cast from 'char *' to 'short *' increases required alignment from 1 to 2 [-Wcast-align]
+          *(short *)&array[ m2a( mcb_addr ) ] = my_size; // merge my budyy
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap.c(170): warning: implicit conversion loses integer precision: 'int' to 'short' [-Wimplicit-int-conversion]
+          *(short *)&array[ m2a( mcb_addr ) ] = my_size; // merge my budyy
+                                              ~ ^~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap.c(190): warning: cast from 'char *' to 'short *' increases required alignment from 1 to 2 [-Wcast-align]
+      short mcb_buddy = *(short *)&array[ m2a( mcb_addr - mcb_chunk ) ];
+                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap.c(205): warning: cast from 'char *' to 'short *' increases required alignment from 1 to 2 [-Wcast-align]
+          *(short *)&array[ m2a( mcb_addr ) ] = 0; // clear myself
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap.c(207): warning: cast from 'char *' to 'short *' increases required alignment from 1 to 2 [-Wcast-align]
+          *(short *)&array[ m2a( mcb_addr - mcb_chunk ) ]
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap.c(208): warning: implicit conversion loses integer precision: 'int' to 'short' [-Wimplicit-int-conversion]
+            = my_size; // merge me to my buddy
+            ~ ^~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap.c(125): warning: no previous prototype for function '_rfree' [-Wmissing-prototypes]
+int _rfree( int mcb_addr ) {
+    ^
+Assembly_Final_Project_Files/C_Programs/heap.c(125): note: declare 'static' if the function is not intended to be used outside of this translation unit
+int _rfree( int mcb_addr ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/heap.c(230): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+void _kinit( ) {
+           ^
+             void
+Assembly_Final_Project_Files/C_Programs/heap.c(232): warning: variable declaration in for loop is a C99-specific feature [-Wc99-extensions]
+  for ( int i = 0x20001000; i < 0x20005000; i++ )
+        ^
+Assembly_Final_Project_Files/C_Programs/heap.c(232): warning: GCC does not allow variable declarations in for loop initializers before C99 [-Wgcc-compat]
+Assembly_Final_Project_Files/C_Programs/heap.c(236): warning: cast from 'char *' to 'short *' increases required alignment from 1 to 2 [-Wcast-align]
+  *(short *)&array[ m2a( mcb_top ) ] = max_size;
+   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap.c(236): warning: implicit conversion loses integer precision: 'int' to 'short' [-Wimplicit-int-conversion]
+  *(short *)&array[ m2a( mcb_top ) ] = max_size;
+                                     ~ ^~~~~~~~
+Assembly_Final_Project_Files/C_Programs/heap.c(238): warning: variable declaration in for loop is a C99-specific feature [-Wc99-extensions]
+  for ( int i = 0x20006804; i < 0x20006C00; i += 2 ) {
+        ^
+Assembly_Final_Project_Files/C_Programs/heap.c(238): warning: GCC does not allow variable declarations in for loop initializers before C99 [-Wgcc-compat]
+Assembly_Final_Project_Files/C_Programs/heap.c(238): error: redefinition of 'i'
+  for ( int i = 0x20006804; i < 0x20006C00; i += 2 ) {
+            ^
+Assembly_Final_Project_Files/C_Programs/heap.c(232): note: previous definition is here
+  for ( int i = 0x20001000; i < 0x20005000; i++ )
+            ^
+Assembly_Final_Project_Files/C_Programs/heap.c(230): warning: no previous prototype for function '_kinit' [-Wmissing-prototypes]
+void _kinit( ) {
+     ^
+Assembly_Final_Project_Files/C_Programs/heap.c(230): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void _kinit( ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/heap.c(250): warning: no previous prototype for function '_kalloc' [-Wmissing-prototypes]
+void *_kalloc( int size ) {
+      ^
+Assembly_Final_Project_Files/C_Programs/heap.c(250): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void *_kalloc( int size ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/heap.c(271): warning: mixing declarations and code is a C99 extension [-Wdeclaration-after-statement]
+  int mcb_addr =  mcb_top + ( addr - heap_top ) / 16;
+      ^
+Assembly_Final_Project_Files/C_Programs/heap.c(262): warning: no previous prototype for function '_kfree' [-Wmissing-prototypes]
+void *_kfree( void *ptr ) {
+      ^
+Assembly_Final_Project_Files/C_Programs/heap.c(262): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void *_kfree( void *ptr ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/heap.c(286): warning: no previous prototype for function '_malloc' [-Wmissing-prototypes]
+void *_malloc( int size ) {
+      ^
+Assembly_Final_Project_Files/C_Programs/heap.c(286): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void *_malloc( int size ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/heap.c(302): warning: no previous prototype for function '_free' [-Wmissing-prototypes]
+void *_free( void *ptr ) {
+      ^
+Assembly_Final_Project_Files/C_Programs/heap.c(302): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void *_free( void *ptr ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/heap.c(12): warning: no previous extern declaration for non-static variable 'array' [-Wmissing-variable-declarations]
+char array[0x8000];            // simulate SRAM: 0x2000.0000 - 0x2000.7FFF
+     ^
+Assembly_Final_Project_Files/C_Programs/heap.c(12): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+char array[0x8000];            // simulate SRAM: 0x2000.0000 - 0x2000.7FFF
+^
+50 warnings and 1 error generated.
+compiling heap.c...
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(5): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+extern void* _memcpy( );
+                    ^
+                      void
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(13): warning: unused parameter 'signum' [-Wunused-parameter]
+void sig_handler1( int signum ) {
+                       ^
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(13): warning: no previous prototype for function 'sig_handler1' [-Wmissing-prototypes]
+void sig_handler1( int signum ) {
+     ^
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(13): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void sig_handler1( int signum ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(17): warning: unused parameter 'signum' [-Wunused-parameter]
+void sig_handler2( int signum ) {
+                       ^
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(17): warning: no previous prototype for function 'sig_handler2' [-Wmissing-prototypes]
+void sig_handler2( int signum ) {
+     ^
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(17): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void sig_handler2( int signum ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(21): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+int main( ) {
+        ^
+          void
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(24): warning: // comments are not allowed in this language [-Wcomment]
+        //_bzero( stringB, 40 );
+        ^
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(27): warning: mixing declarations and code is a C99 extension [-Wdeclaration-after-statement]
+        void* mem1 = _malloc( 1024 );
+              ^
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(11): warning: no previous extern declaration for non-static variable 'alarmed' [-Wmissing-variable-declarations]
+int* alarmed;
+     ^
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(11): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int* alarmed;
+^
+9 warnings generated.
+compiling driver_keil.c...
+RTE/Device/TM4C129XNCZAD/system_TM4C129.c(14): warning: In file included from...
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129\TM4C129.h(54): warning: In file included from...
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(284): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(324): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(343): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(676): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(692): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(737): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(742): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(844): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(857): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(864): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(869): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(876): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(882): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(889): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(896): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(901): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(908): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(914): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(921): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(928): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(933): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(940): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(946): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(953): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(960): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(965): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(972): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(978): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(985): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(992): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(997): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(1004): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(1010): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(1017): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(1024): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(1029): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(1036): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(1042): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(1049): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(1056): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(1061): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(1068): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(1074): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(1291): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(1298): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(1334): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(1339): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(1344): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(1349): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(1354): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129/TM4C129XNCZAD.h(1359): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+51 warnings generated.
+compiling system_TM4C129.c...
+".\Objects\Final_Project.axf" - 4 Error(s), 148 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
+                ARM.CMSIS.5.9.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.6.0
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.TM4C_DFP.1.1.0.pack
+                Keil.TM4C_DFP.1.1.0
+                Texas Instruments Tiva C Series Device Support and Examples
+   * Component: Startup Version: 1.0.0
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/_Target_1
+  C:/Users/kaleb/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include
+  C:/Users/kaleb/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.6.0
+
+   * Component: Keil::Device:Startup:1.0.0
+      Source file:   Device/Source/ARM/startup_TM4C129.s
+      Include file:  Device/Include/TM4C129/TM4C129.h
+      Source file:   Device/Source/system_TM4C129.c
+Target not created.
+Build Time Elapsed:  00:00:02
+</pre>
+</body>
+</html>
