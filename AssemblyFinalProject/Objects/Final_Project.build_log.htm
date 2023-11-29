@@ -29,11 +29,6 @@ Project File Date:  11/15/2023
 Build target 'Target 1'
 Note: source file '.\Assembly_Final_Project_Files\Thumb2_Programs\heap_template.s' - object file renamed from '.\Objects\heap_template.o' to '.\Objects\heap_template_1.o'.
 Note: source file '.\Assembly_Final_Project_Files\Thumb2_Programs\heap_template.s' - object file renamed from '.\Objects\heap_template.o' to '.\Objects\heap_template_1.o'.
-"Assembly_Final_Project_Files/Thumb2_Programs/stdlib_midpoint.s", line 101 (column 16): Error: A1516E: Bad symbol '__NR_alarm', not defined or external
-  101 0000004a   LDR     r7, =__NR_alarm
-                              ^
-1 Error, 0 Warnings
-assembling stdlib_midpoint.s...
 Assembly_Final_Project_Files/C_Programs/driver.c(6): warning: // comments are not allowed in this language [-Wcomment]
 #include <string.h> // bzero, strncpy
                     ^
@@ -229,6 +224,7 @@ char array[0x8000];            // simulate SRAM: 0x2000.0000 - 0x2000.7FFF
 ^
 36 warnings and 1 error generated.
 compiling heap_template.c...
+assembling svc_template.s...
 Assembly_Final_Project_Files/C_Programs/heap.c(5): warning: // comments are not allowed in this language [-Wcomment]
 #include <stdio.h> // printf
                    ^
@@ -453,11 +449,7 @@ char array[0x8000];            // simulate SRAM: 0x2000.0000 - 0x2000.7FFF
 ^
 50 warnings and 1 error generated.
 compiling heap.c...
-"Assembly_Final_Project_Files/Thumb2_Programs/svc_template.s", line 19 (column 18): Error: A1516E: Bad symbol 'handler_function', not defined or external
-   19 00000000     LDR     r0, =handler_function
-                                ^
-1 Error, 0 Warnings
-assembling svc_template.s...
+assembling stdlib_midpoint.s...
 ".\Objects\Final_Project.axf" - 4 Error(s), 88 Warning(s).
 
 <h2>Software Packages used:</h2>
