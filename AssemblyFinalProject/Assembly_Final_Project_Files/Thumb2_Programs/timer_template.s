@@ -22,35 +22,77 @@ USR_HANDLER     EQU		0x20007B84		; Address of a user-given signal handler functi
 ; void timer_init( )
 		EXPORT		_timer_init
 _timer_init
-	;; Implement by yourself
-	
-		MOV		pc, lr		; return to Reset_Handler
+        LDR R0, =STCTRL
+        LDR R1, =STCTRL_STOP
+        STR R1, [R0]
+
+        LDR R0, =STRELOAD
+        LDR R1, =STRELOAD_MX
+        STR R1, [R0]
+
+        MOV     pc, lr
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Timer start
 ; int timer_start( int seconds )
 		EXPORT		_timer_start
 _timer_start
-	;; Implement by yourself
-	
-		MOV		pc, lr		; return to SVC_Handler
+        PUSH {LR}
+
+        MOV R1, R0
+
+        LDR R0, =STCTRL
+        LDR R1, =STCTRL_STOP
+        STR R1, [R0]
+
+        LDR R0, =STCURRENT
+        LDR R1, =STCURR_CLR
+        STR R1, [R0]
+
+        LDR R0, =SECOND_LEFT
+        STR R1, [R0]
+
+        LDR R0, =STCTRL
+        LDR R1, =STCTRL_GO
+        STR R1, [R0]
+
+        POP {PC}
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Timer update
 ; void timer_update( )
 		EXPORT		_timer_update
 _timer_update
-	;; Implement by yourself
-	
-		MOV		pc, lr		; return to SysTick_Handler
+        LDR R0, =SECOND_LEFT
+        LDR R1, [R0]
+        SUBS R1, R1, #1
+        STR R1, [R0]
+
+        CMP R1, #0
+        BNE _update_done
+
+        LDR R0, =USR_HANDLER
+        LDR R1, [R0]
+        CMP R1, #0
+        BEQ _update_done
+        BLX R1
+
+_update_done
+        MOV pc, lr
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Timer update
 ; void* signal_handler( int signum, void* handler )
 	    EXPORT	_signal_handler
 _signal_handler
-	;; Implement by yourself
-	
-		MOV		pc, lr		; return to Reset_Handler
-		
-		END		
+        CMP R0, #SIGALRM
+        BNE _handler_done
+
+        LDR R2, =USR_HANDLER
+        STR R1, [R2]
+
+_handler_done
+        MOV pc, lr
+
+        END

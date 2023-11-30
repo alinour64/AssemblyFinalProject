@@ -94,11 +94,13 @@ _free
 ;                  ed alarm. 
 		EXPORT	_alarm
 _alarm
-		; save registers
-		; set the system call # to R7
-        	SVC     #0x0
-		; resume registers	
-		MOV		pc, lr		
+    PUSH    {R4-R7, LR}       
+    MOV     R0, R0        
+    LDR     R7, =1         
+    SVC     #0x0           
+    POP     {R4-R7, LR}      
+    MOV     pc, lr             ; Return from the function
+
 			
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; void* _signal( int signum, void *handler )

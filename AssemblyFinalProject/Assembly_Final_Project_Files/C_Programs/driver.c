@@ -3,7 +3,7 @@
  * on Linux and MacOS.
  */
 
-#include <string.h> // bzero, strncpy
+#include <string.h>   // bzero, strncpy
 #include <stdlib.h>  // malloc, free
 #include <signal.h>  // signal
 #include <unistd.h>  // alarm

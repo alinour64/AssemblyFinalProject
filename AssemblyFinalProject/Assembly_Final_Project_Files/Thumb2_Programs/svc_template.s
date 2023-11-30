@@ -15,19 +15,41 @@ SYS_FREE		EQU		0x5		; address 20007B14
 ; System Call Table Initialization
 		EXPORT	_syscall_table_init
 _syscall_table_init
-	;; Implement by yourself
-	
-		MOV		pc, lr
+    LDR     R0, =SYSTEMCALLTBL     
+    LDR     R1, =_sys_exit
+    STR     R1, [R0], #4           
+
+    LDR     R1, =_sys_alarm
+    STR     R1, [R0], #4         
+
+    LDR     R1, =_sys_signal
+    STR     R1, [R0], #4
+
+    LDR     R1, =_sys_memcpy
+    STR     R1, [R0], #4
+
+    LDR     R1, =_sys_malloc
+    STR     R1, [R0], #4
+
+    LDR     R1, =_sys_free
+    STR     R1, [R0]
+
+    MOV     pc, lr                ; Return from the function
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; System Call Table Jump Routine
         EXPORT	_syscall_table_jump
 _syscall_table_jump
-	;; Implement by yourself
-	
-		MOV		pc, lr			
-		
-		END
+    LDR     R1, =SYSTEMCALLTBL    
+    LDR     R2, [R7]              
+    LSL     R2, R2, #2           
+    ADD     R1, R1, R2             
+    LDR     R1, [R1]             
+    BLX     R1                     
+
+    MOV     pc, lr                
+
+        END
 
 
 		

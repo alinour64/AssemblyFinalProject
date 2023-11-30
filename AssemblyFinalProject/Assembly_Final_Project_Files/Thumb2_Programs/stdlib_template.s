@@ -1,4 +1,4 @@
-		AREA	|.text|, CODE, READONLY, ALIGN=2
+			AREA	|.text|, CODE, READONLY, ALIGN=2
 		THUMB
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

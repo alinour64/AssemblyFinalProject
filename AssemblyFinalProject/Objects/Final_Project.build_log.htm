@@ -22,29 +22,13 @@ Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
 C:\Users\alino\OneDrive\School\Current\CSS 422 Hardware and Computer Organization\Final Project\AssemblyFinalProject\AssemblyFinalProject\Final_Project.uvprojx
-Project File Date:  11/15/2023
+Project File Date:  11/29/2023
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
 Note: source file '.\Assembly_Final_Project_Files\Thumb2_Programs\heap_template.s' - object file renamed from '.\Objects\heap_template.o' to '.\Objects\heap_template_1.o'.
 Note: source file '.\Assembly_Final_Project_Files\Thumb2_Programs\heap_template.s' - object file renamed from '.\Objects\heap_template.o' to '.\Objects\heap_template_1.o'.
-Assembly_Final_Project_Files/C_Programs/driver.c(6): warning: // comments are not allowed in this language [-Wcomment]
-#include <string.h> // bzero, strncpy
-                    ^
-Assembly_Final_Project_Files/C_Programs/driver.c(9): error: 'unistd.h' file not found
-#include <unistd.h>  // alarm
-         ^~~~~~~~~~
-1 warning and 1 error generated.
-compiling driver.c...
-Assembly_Final_Project_Files/C_Programs/driver_cpg.c(12): warning: // comments are not allowed in this language [-Wcomment]
-#include <string.h> // bzero, strncpy
-                    ^
-Assembly_Final_Project_Files/C_Programs/driver_cpg.c(15): error: 'unistd.h' file not found
-#include <unistd.h>  // alarm
-         ^~~~~~~~~~
-1 warning and 1 error generated.
-compiling driver_cpg.c...
 Assembly_Final_Project_Files/C_Programs/heap_template.c(5): warning: // comments are not allowed in this language [-Wcomment]
 #include <stdio.h> // printf
                    ^
@@ -224,7 +208,6 @@ char array[0x8000];            // simulate SRAM: 0x2000.0000 - 0x2000.7FFF
 ^
 36 warnings and 1 error generated.
 compiling heap_template.c...
-assembling svc_template.s...
 Assembly_Final_Project_Files/C_Programs/heap.c(5): warning: // comments are not allowed in this language [-Wcomment]
 #include <stdio.h> // printf
                    ^
@@ -449,8 +432,144 @@ char array[0x8000];            // simulate SRAM: 0x2000.0000 - 0x2000.7FFF
 ^
 50 warnings and 1 error generated.
 compiling heap.c...
-assembling stdlib_midpoint.s...
-".\Objects\Final_Project.axf" - 4 Error(s), 88 Warning(s).
+Assembly_Final_Project_Files/C_Programs/driver.c(6): warning: // comments are not allowed in this language [-Wcomment]
+#include <string.h>   // bzero, strncpy
+                      ^
+Assembly_Final_Project_Files/C_Programs/driver.c(14): warning: unused parameter 'signum' [-Wunused-parameter]
+void sig_handler1( int signum ) {
+                       ^
+Assembly_Final_Project_Files/C_Programs/driver.c(14): warning: no previous prototype for function 'sig_handler1' [-Wmissing-prototypes]
+void sig_handler1( int signum ) {
+     ^
+Assembly_Final_Project_Files/C_Programs/driver.c(14): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void sig_handler1( int signum ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/driver.c(18): warning: unused parameter 'signum' [-Wunused-parameter]
+void sig_handler2( int signum ) {
+                       ^
+Assembly_Final_Project_Files/C_Programs/driver.c(18): warning: no previous prototype for function 'sig_handler2' [-Wmissing-prototypes]
+void sig_handler2( int signum ) {
+     ^
+Assembly_Final_Project_Files/C_Programs/driver.c(18): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void sig_handler2( int signum ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/driver.c(22): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+int main( ) {
+        ^
+          void
+Assembly_Final_Project_Files/C_Programs/driver.c(26): warning: implicit declaration of function 'bzero' [-Wimplicit-function-declaration]
+  bzero( stringB, 40 );
+  ^
+Assembly_Final_Project_Files/C_Programs/driver.c(56): error: use of undeclared identifier 'SIGALRM'
+  signal( SIGALRM, sig_handler1 );
+          ^
+Assembly_Final_Project_Files/C_Programs/driver.c(57): warning: implicit declaration of function 'alarm' [-Wimplicit-function-declaration]
+  alarm( 2 );
+  ^
+Assembly_Final_Project_Files/C_Programs/driver.c(64): error: use of undeclared identifier 'SIGALRM'
+  signal( SIGALRM, sig_handler2 );
+          ^
+Assembly_Final_Project_Files/C_Programs/driver.c(32): warning: mixing declarations and code is a C99 extension [-Wdeclaration-after-statement]
+  void* mem1 = malloc( 1024 );
+        ^
+Assembly_Final_Project_Files/C_Programs/driver.c(12): warning: no previous extern declaration for non-static variable 'alarmed' [-Wmissing-variable-declarations]
+int* alarmed;
+     ^
+Assembly_Final_Project_Files/C_Programs/driver.c(12): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int* alarmed;
+^
+10 warnings and 2 errors generated.
+compiling driver.c...
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(12): warning: // comments are not allowed in this language [-Wcomment]
+#include <string.h> // bzero, strncpy
+                    ^
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(23): warning: unused parameter 'signum' [-Wunused-parameter]
+void sig_handler1( int signum ) {
+                       ^
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(23): warning: no previous prototype for function 'sig_handler1' [-Wmissing-prototypes]
+void sig_handler1( int signum ) {
+     ^
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(23): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void sig_handler1( int signum ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(27): warning: unused parameter 'signum' [-Wunused-parameter]
+void sig_handler2( int signum ) {
+                       ^
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(27): warning: no previous prototype for function 'sig_handler2' [-Wmissing-prototypes]
+void sig_handler2( int signum ) {
+     ^
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(27): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void sig_handler2( int signum ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(31): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+int main( ) {
+        ^
+          void
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(35): warning: implicit declaration of function 'bzero' [-Wimplicit-function-declaration]
+  bzero( stringB, 40 );
+  ^
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(42): warning: format specifies type 'unsigned int' but the argument has type 'void *' [-Wformat]
+  printf( "mem1 = %x\n", mem1 );
+                  ~~     ^~~~
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(45): warning: format specifies type 'unsigned int' but the argument has type 'void *' [-Wformat]
+  printf( "mem2 = %x\n", mem2 );
+                  ~~     ^~~~
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(48): warning: format specifies type 'unsigned int' but the argument has type 'void *' [-Wformat]
+  printf( "mem3 = %x\n", mem3 );
+                  ~~     ^~~~
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(51): warning: format specifies type 'unsigned int' but the argument has type 'void *' [-Wformat]
+  printf( "mem4 = %x\n", mem4 );
+                  ~~     ^~~~
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(54): warning: format specifies type 'unsigned int' but the argument has type 'void *' [-Wformat]
+  printf( "mem5 = %x\n", mem5 );
+                  ~~     ^~~~
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(57): warning: format specifies type 'unsigned int' but the argument has type 'void *' [-Wformat]
+  printf( "mem6 = %x\n", mem6 );
+                  ~~     ^~~~
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(60): warning: format specifies type 'unsigned int' but the argument has type 'void *' [-Wformat]
+  printf( "mem7 = %x\n", mem7 );
+                  ~~     ^~~~
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(69): warning: format specifies type 'unsigned int' but the argument has type 'void *' [-Wformat]
+  printf( "mem8 = %x\n", mem8 );
+                  ~~     ^~~~
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(41): warning: mixing declarations and code is a C99 extension [-Wdeclaration-after-statement]
+  void* mem1 = _malloc( 1024 );
+        ^
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(21): warning: no previous extern declaration for non-static variable 'alarmed' [-Wmissing-variable-declarations]
+int* alarmed;
+     ^
+Assembly_Final_Project_Files/C_Programs/driver_cpg.c(21): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int* alarmed;
+^
+17 warnings generated.
+compiling driver_cpg.c...
+"Assembly_Final_Project_Files/Thumb2_Programs/svc_template.s", line 19 (column 18): Error: A1516E: Bad symbol '_sys_exit', not defined or external
+   19 00000002     LDR     R1, =_sys_exit
+                                ^
+"Assembly_Final_Project_Files/Thumb2_Programs/svc_template.s", line 22 (column 18): Error: A1516E: Bad symbol '_sys_alarm', not defined or external
+   22 00000008     LDR     R1, =_sys_alarm
+                                ^
+"Assembly_Final_Project_Files/Thumb2_Programs/svc_template.s", line 25 (column 18): Error: A1516E: Bad symbol '_sys_signal', not defined or external
+   25 0000000e     LDR     R1, =_sys_signal
+                                ^
+"Assembly_Final_Project_Files/Thumb2_Programs/svc_template.s", line 28 (column 18): Error: A1516E: Bad symbol '_sys_memcpy', not defined or external
+   28 00000014     LDR     R1, =_sys_memcpy
+                                ^
+"Assembly_Final_Project_Files/Thumb2_Programs/svc_template.s", line 31 (column 18): Error: A1516E: Bad symbol '_sys_malloc', not defined or external
+   31 0000001a     LDR     R1, =_sys_malloc
+                                ^
+"Assembly_Final_Project_Files/Thumb2_Programs/svc_template.s", line 34 (column 18): Error: A1516E: Bad symbol '_sys_free', not defined or external
+   34 00000020     LDR     R1, =_sys_free
+                                ^
+"Assembly_Final_Project_Files/Thumb2_Programs/svc_template.s", line 52: Warning: A1581W: Added 2 bytes of padding at address 0x36
+   52 00000038         END
+6 Errors, 1 Warning
+assembling svc_template.s...
+".\Objects\Final_Project.axf" - 4 Error(s), 113 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -476,11 +595,11 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.6.0
 
    * Component: Keil::Device:Startup:1.0.0
-      Include file:  Device/Include/TM4C129/TM4C129.h
       Source file:   Device/Source/ARM/startup_TM4C129.s
+      Include file:  Device/Include/TM4C129/TM4C129.h
       Source file:   Device/Source/system_TM4C129.c
 Target not created.
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>
