@@ -76,14 +76,15 @@ _malloc
 ;	size	- the address of a space to deallocate
 ; Return value
 ;   	none
-		EXPORT	_free
+		EXPORT _free
 _free
-		; save registers
-		; set the system call # to R7
-        	SVC     #0x0
-		; resume registers
-		MOV		pc, lr
-
+		PUSH {R4-R7, LR}         ; Save registers including LR
+		MOV R4, R0              ; Move addr to R4 for safe-keeping
+		LDR R7, =4              ; Load the system call number for _free into R7
+		MOV R0, R4              ; Restore addr from R4 to R0
+		SVC #0x0               ; Supervisor call
+		POP {R4-R7, LR}         ; Restore registers including LR
+		MOV pc, LR              ; Return from the function
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; unsigned int _alarm( unsigned int seconds )
 ; Parameters
@@ -110,13 +111,18 @@ _alarm
 ; Return value
 ;   void*   - a pointer to the user-level signal handling function previously handled
 ;             (the same as the 2nd parameter in this project)
-		EXPORT	_signal
+		EXPORT _signal
 _signal
-		; save registers
-		; set the system call # to R7
-        	SVC     #0x0
-		; resume registers
-		MOV		pc, lr	
+		PUSH {R4-R7, LR}         ; Save registers including LR
+		MOV R4, R0              ; Move signum to R4 for safe-keeping
+		MOV R5, R1              ; Move handler to R5 for safe-keeping
+		LDR R7, =2              ; Load the system call number for _signal into R7
+		MOV R0, R4              ; Restore signum from R4 to R0
+		MOV R1, R5              ; Restore handler from R5 to R1
+		SVC #0x0               ; Supervisor call
+		POP {R4-R7, LR}         ; Restore registers including LR
+		MOV pc, LR              ; Return from the function
+	
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 		END			
