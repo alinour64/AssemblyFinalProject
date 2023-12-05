@@ -57,9 +57,7 @@ __initial_sp
 ; Vector Table Mapped to Address 0 at Reset
 
                 AREA    RESET, DATA, READONLY
-                EXPORT  __Vectors
-                EXPORT  __Vectors_End
-                EXPORT  __Vectors_Size
+
 
 __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     Reset_Handler             ; Reset Handler
@@ -1063,7 +1061,6 @@ GPIOT_Handler\
                 ELSE
 
                 IMPORT  __use_two_region_memory
-                EXPORT  __user_initial_stackheap
 __user_initial_stackheap
 
                 LDR     R0, =  Heap_Mem
