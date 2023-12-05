@@ -30,6 +30,16 @@ Section Cross References
     startup_tm4c129_midpoint.o(.text) refers to system_tm4c129.o(.text.SystemInit) for SystemInit
     startup_tm4c129_midpoint.o(.text) refers to __main.o(!!!main) for __main
     startup_tm4c129_midpoint.o(.text) refers to startup_tm4c129_midpoint.o(HEAP) for Heap_Mem
+    startup_tm4c129.o(STACK) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup_tm4c129.o(HEAP) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup_tm4c129.o(RESET) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup_tm4c129.o(RESET) refers to startup_tm4c129.o(STACK) for __initial_sp
+    startup_tm4c129.o(RESET) refers to startup_tm4c129_midpoint.o(.text) for Reset_Handler
+    startup_tm4c129.o(.text) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup_tm4c129.o(.text) refers to system_tm4c129.o(.text.SystemInit) for SystemInit
+    startup_tm4c129.o(.text) refers to __main.o(!!!main) for __main
+    startup_tm4c129.o(.text) refers to startup_tm4c129.o(HEAP) for Heap_Mem
+    startup_tm4c129.o(.text) refers to startup_tm4c129.o(STACK) for Stack_Mem
     system_tm4c129.o(.text.SystemCoreClockUpdate) refers to system_tm4c129.o(.data.SystemCoreClock) for SystemCoreClock
     system_tm4c129.o(.ARM.exidx.text.SystemCoreClockUpdate) refers to system_tm4c129.o(.text.SystemCoreClockUpdate) for [Anonymous Symbol]
     system_tm4c129.o(.text.SystemInit) refers to system_tm4c129.o(.data.SystemCoreClock) for SystemCoreClock
@@ -56,6 +66,7 @@ Section Cross References
     __rtentry4.o(.ARM.exidx) refers to __rtentry4.o(.ARM.Collect$$rtentry$$00000004) for .ARM.Collect$$rtentry$$00000004
     sys_stackheap_outer.o(.text) refers to libspace.o(.text) for __user_perproc_libspace
     sys_stackheap_outer.o(.text) refers to startup_tm4c129_midpoint.o(.text) for __user_initial_stackheap
+    sys_stackheap_outer.o(.text) refers to startup_tm4c129.o(.text) for __user_initial_stackheap
     exit.o(.text) refers to rtexit.o(.ARM.Collect$$rtexit$$00000000) for __rt_exit
     libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000030) for __rt_lib_init_alloca_1
     libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000002E) for __rt_lib_init_argv_1
@@ -142,21 +153,3 @@ Section Cross References
     defsig_segv_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
     defsig_other.o(.text) refers to defsig_general.o(.text) for __default_signal_display
 
-
-==============================================================================
-
-Removing Unused input sections from the image.
-
-    Removing driver_keil.o(.text), (0 bytes).
-    Removing driver_keil.o(.ARM.exidx.text.sig_handler1), (8 bytes).
-    Removing driver_keil.o(.ARM.exidx.text.sig_handler2), (8 bytes).
-    Removing driver_keil.o(.ARM.exidx.text.main), (8 bytes).
-    Removing driver_keil.o(.ARM.use_no_argv), (4 bytes).
-    Removing svc_template.o(.text), (2 bytes).
-    Removing startup_tm4c129.o(.text), (0 bytes).
-    Removing system_tm4c129.o(.text), (0 bytes).
-    Removing system_tm4c129.o(.text.SystemCoreClockUpdate), (20 bytes).
-    Removing system_tm4c129.o(.ARM.exidx.text.SystemCoreClockUpdate), (8 bytes).
-    Removing system_tm4c129.o(.ARM.exidx.text.SystemInit), (8 bytes).
-
-11 unused section(s) (total 66 bytes) removed from the image.
