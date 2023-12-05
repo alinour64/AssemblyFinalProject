@@ -228,17 +228,19 @@ int _rfree( int mcb_addr ) {
  * driver.c's main( ).
  */
 void _kinit( ) {
-  // Zeroing the heap space: no need to implement in step 2's assembly code.
-  for ( int i = 0x20001000; i < 0x20005000; i++ )
-    array[ m2a( i ) ] = 0;
+    int i;  // Declare the loop variable outside the for loops
 
-  // Initializing MCB: you need to implement in step 2's assembly code.
-  *(short *)&array[ m2a( mcb_top ) ] = max_size;
-    
-  for ( int i = 0x20006804; i < 0x20006C00; i += 2 ) {
-    array[ m2a( i ) ] = 0;
-    array[ m2a( i + 1) ] = 0;
-  }
+    // Zeroing the heap space: no need to implement in step 2's assembly code.
+    for (i = 0x20001000; i < 0x20005000; i++)
+        array[m2a(i)] = 0;
+
+    // Initializing MCB: you need to implement in step 2's assembly code.
+    *(short *)&array[m2a(mcb_top)] = max_size;
+
+    for (i = 0x20006804; i < 0x20006C00; i += 2) {
+        array[m2a(i)] = 0;
+        array[m2a(i + 1)] = 0;
+    }
 }
 
 /*

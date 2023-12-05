@@ -13,6 +13,9 @@ SYS_FREE		EQU		0x5		; address 20007B14
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; System Call Table Initialization
+_sys_exit
+    BX      lr
+    END
 		EXPORT	_syscall_table_init
 _syscall_table_init
     LDR     R0, =SYSTEMCALLTBL     

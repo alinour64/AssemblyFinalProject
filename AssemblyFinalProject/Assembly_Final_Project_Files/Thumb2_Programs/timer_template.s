@@ -62,7 +62,7 @@ _timer_start
 ; Timer update
 ; void timer_update( )
 		EXPORT		_timer_update
-_timer_update
+_timer_update PROC
         LDR R0, =SECOND_LEFT
         LDR R1, [R0]
         SUBS R1, R1, #1
@@ -80,7 +80,8 @@ _timer_update
 _update_done
         MOV pc, lr
 
-
+EXPORT _timer_update
+ENDP
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Timer update
 ; void* signal_handler( int signum, void* handler )
