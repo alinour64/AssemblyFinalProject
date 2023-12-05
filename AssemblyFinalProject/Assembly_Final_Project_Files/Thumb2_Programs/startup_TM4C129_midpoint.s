@@ -201,47 +201,50 @@ __Vectors_Size  EQU     __Vectors_End - __Vectors
 
 
 ; Reset Handler
-
 Reset_Handler   PROC
                 EXPORT  Reset_Handler             [WEAK]
                 IMPORT  SystemInit
                 IMPORT  __main
-		IMPORT	_syscall_table_init
-		IMPORT	_heap_init
-		IMPORT	_timer_init
+                IMPORT  _syscall_table_init
+                IMPORT  _heap_init
+                IMPORT  _timer_init
+                IMPORT  _kinit
 
-		; Store __initial_sp into MSP (Step 1 toward Midpoint Report)	
-		LDR	R0, =__initial_sp ; thread mode uses MSP
-		MSR	MSP, R0
+                ; Initialize the Main Stack Pointer (MSP)
+                LDR     R0, =__initial_sp
+                MSR     MSP, R0
+                ISB
 
-		ISB     ; Let's leave as is from the original.
+                ; System Initialization Call
                 LDR     R0, =SystemInit
-        	BLX     R0
+                BLX     R0
 
-		; Initialize the system call table (Step 2)
-		LDR     R0, =_syscall_table_init
-		BLX     R0
+                ; Initialize system call table
+                LDR     R0, =_syscall_table_init
+                BLX     R0
 
-		; Initialize the heap space (Step 2)
-		LDR     R0, =_heap_init
-		BLX     R0
+                ; Initialize heap
+                LDR     R0, =_kinit
+                BLX     R0
 
-		; Initialize the SysTick timer (Step 2)
-		LDR     R0, =_timer_init
-		BLX     R0
+                ; Initialize timer
+                LDR     R0, =_timer_init
+                BLX     R0
 
-	
-		; Store __initial_user_sp into PSP (Step 1 toward Midpoint Report)
-		LDR	R0, =__initial_user_sp
-	        MSR	PSP, R0
-	
-		; Change CPU mode into unprivileged thread mode using PSP
-		MOVS	R0,	#3	; Set SPSEL bit 1, nPriv bit 0
-		MSR	CONTROL, R0	; Now thread mode uses PSP for user
-	
+                ; Initialize the Process Stack Pointer (PSP)
+                LDR     R0, =__initial_user_sp
+                MSR     PSP, R0
+
+                ; Switch to use PSP and unprivileged mode
+                MOVS    R0, #3          ; Set CONTROL to switch to PSP and unprivileged mode
+                MSR     CONTROL, R0
+                ISB                     ; Instruction Synchronization Barrier
+
+                ; Branch to __main
                 LDR     R0, =__main
                 BX      R0
                 ENDP
+
 
 ; Dummy Exception Handlers (infinite loops which can be modified)
 
@@ -271,26 +274,26 @@ UsageFault_Handler\
                 ENDP
 SVC_Handler PROC
     EXPORT SVC_Handler [WEAK]
-		; Save registers 
-		; Invoke _syscall_table_ump
-		; Retrieve registers
-		; Go back to stdlib.s
-    PUSH {R4-R11, LR}
-    MRS R0, PSP             
-    LDR R1, [R0, #24]    
-    SUB R1, R1, #2        
-    LDRB R1, [R1]         
-    
-    LDR R2, =SYSTEMCALLTBL 
-    LSL R1, R1, #2
-    ADD R2, R2, R1   
-    LDR R2, [R2]         
-    BLX R2                 
+    IMPORT _system_call_table_jump
 
+    ; Save registers
+    PUSH {R4-R11, LR}
+
+    ; Retrieve the value of the Program Counter to get the SVC number
+    MRS R0, PSP
+    LDR R1, [R0, #24]
+    SUB R1, R1, #2
+    LDRB R1, [R1]
+
+    ; Call system call table jump function
+    LDR R2, =_system_call_table_jump
+    BLX R2
+
+    ; Restore registers and return
     POP {R4-R11, LR}
     BX LR
+	ENDP
 
-ENDP
 
 DebugMon_Handler\
                 PROC
@@ -302,23 +305,22 @@ PendSV_Handler\
                 EXPORT  PendSV_Handler            [WEAK]
                 B       .
                 ENDP
-SysTick_Handler\
-                PROC		; (Step 2)
-        	EXPORT  SysTick_Handler           [WEAK]
-		; Save registers
-		; Invoke _timer_update
-		; Retrieve registers
-		; Change from MSP to PSP
-		; Go back to the user program
-		PUSH {R4-R11, LR}
-		BL _timer_update
-		POP {R4-R11, LR}
-		MRS R0, CONTROL 
-		ORRS R0, R0, #0x02
-		MSR CONTROL, R0
-		ISB   
-        BX LR    
-        ENDP
+SysTick_Handler PROC
+    EXPORT SysTick_Handler [WEAK]
+    IMPORT _timer_update
+
+    ; Save registers
+    PUSH {R4-R11, LR}
+
+    ; Call timer update function
+    BL _timer_update
+
+    ; Restore registers and return
+    POP {R4-R11, LR}
+    BX LR
+ENDP
+
+
 
 GPIOA_Handler\
                 PROC

@@ -22,36 +22,324 @@ Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
 C:\Users\alino\OneDrive\School\Current\CSS 422 Hardware and Computer Organization\Final Project\AssemblyFinalProject\AssemblyFinalProject\Final_Project.uvprojx
-Project File Date:  12/04/2023
+Project File Date:  12/05/2023
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
 Note: source file '.\Assembly_Final_Project_Files\Thumb2_Programs\heap_template.s' - object file renamed from '.\Objects\heap_template.o' to '.\Objects\heap_template_1.o'.
 Note: source file '.\Assembly_Final_Project_Files\Thumb2_Programs\heap_template.s' - object file renamed from '.\Objects\heap_template.o' to '.\Objects\heap_template_1.o'.
-"Assembly_Final_Project_Files/Thumb2_Programs/timer_template.s", line 3 (column 8): Error: A1163E: Unknown opcode _timer_update , expecting opcode or Macro
-    3 00000000 EXPORT _timer_update
-                      ^
-"Assembly_Final_Project_Files/Thumb2_Programs/timer_template.s", line 99: Warning: A1488W: PROC/FUNC at line 65 in 'Assembly_Final_Project_Files/Thumb2_Programs/timer_template.s' without matching ENDP/ENDFUNC
-   99 00000056         END
-1 Error, 1 Warning
-assembling timer_template.s...
-"Assembly_Final_Project_Files/Thumb2_Programs/startup_TM4C129_midpoint.s", line 296: Warning: A1488W: PROC/FUNC at line 272 in 'Assembly_Final_Project_Files/Thumb2_Programs/startup_TM4C129_midpoint.s' without matching ENDP/ENDFUNC
-  296 00000056 DebugMon_Handler \037                PROC
-"Assembly_Final_Project_Files/Thumb2_Programs/startup_TM4C129_midpoint.s", line 284 (column 14): Error: A1516E: Bad symbol 'SYSTEMCALLTBL', not defined or external
-  284 00000044     LDR R2, =SYSTEMCALLTBL 
-                            ^
-"Assembly_Final_Project_Files/Thumb2_Programs/startup_TM4C129_midpoint.s", line 314 (column 6): Error: A1516E: Bad symbol '_timer_update', not defined or external
-  314 0000005e   BL _timer_update
-                    ^
-2 Errors, 1 Warning
-assembling startup_TM4C129_midpoint.s...
+assembling svc_template.s...
 linking...
-.\Objects\Final_Project.axf: error: L6002U: Could not open file .\objects\startup_tm4c129_midpoint.o: No such file or directory
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOQ3_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOQ3_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER6B_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER6B_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol PendSV_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol PendSV_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol SYSCTL_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol SYSCTL_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER0B_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER0B_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol HardFault_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol HardFault_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER3A_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER3A_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UART1_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UART1_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol ADC0SS3_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol ADC0SS3_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol SysTick_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol SysTick_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol NMI_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol NMI_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol SSI0_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol SSI0_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol PWM0_1_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol PWM0_1_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol DebugMon_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol DebugMon_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol I2C3_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol I2C3_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol MemManage_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol MemManage_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UsageFault_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UsageFault_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER3B_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER3B_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOC_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOC_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOQ6_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOQ6_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol Reset_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol Reset_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UART0_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UART0_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol ADC0SS2_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol ADC0SS2_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol BusFault_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol BusFault_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol SVC_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol SVC_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOA_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOA_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOB_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOB_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER3A_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER3A_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOD_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOD_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol I2C0_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol I2C0_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOE_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOE_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol PMW0_FAULT_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol PMW0_FAULT_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol PWM0_0_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol PWM0_0_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol PWM0_2_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol PWM0_2_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol QEI0_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol QEI0_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol ADC0SS0_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol ADC0SS0_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol ADC0SS1_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol ADC0SS1_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WDT0_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WDT0_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOP7_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOP7_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER0A_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER0A_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER1A_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER1A_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOQ7_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOQ7_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER1B_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER1B_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER2A_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER2A_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER2B_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER2B_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol COMP0_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol COMP0_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol COMP1_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol COMP1_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol COMP2_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol COMP2_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol FLASH_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol FLASH_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOF_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOF_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOG_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOG_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOH_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOH_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UART2_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UART2_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol SSI1_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol SSI1_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol I2C1_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol I2C1_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol ADC1SS1_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol ADC1SS1_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol CAN0_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol CAN0_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol ADC1SS2_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol ADC1SS2_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol CAN1_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol CAN1_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol ETH_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol ETH_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol HIB_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol HIB_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol USB0_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol USB0_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol PWM0_3_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol PWM0_3_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOR_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOR_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UDMA_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UDMA_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UDMAERR_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UDMAERR_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol ADC1SS0_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol ADC1SS0_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol ADC1SS3_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol ADC1SS3_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol EBI0_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol EBI0_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOS_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOS_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER5B_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER5B_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOJ_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOJ_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOK_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOK_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOL_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOL_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol SSI2_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol SSI2_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol SSI3_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol SSI3_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UART3_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UART3_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UART4_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UART4_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UART5_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UART5_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UART6_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UART6_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UART7_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol UART7_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol I2C2_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol I2C2_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER4A_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER4A_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER4B_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER4B_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER5A_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER5A_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER5B_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER5B_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol HIMLEDSEQUENCER_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol HIMLEDSEQUENCER_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER0A_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER0A_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER0B_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER0B_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER1A_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER1A_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER1B_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER1B_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER2A_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER2A_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER2B_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER2B_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER3B_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER3B_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER4A_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER4A_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER4B_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER4B_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER5A_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol WTIMER5A_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol FPU_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol FPU_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol I2C4_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol I2C4_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol I2C5_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol I2C5_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOM_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOM_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPION_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPION_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TAMPER_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TAMPER_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOP0_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOP0_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOP1_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOP1_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOP2_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOP2_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOP3_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOP3_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOP4_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOP4_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOP5_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOP5_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOP6_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOP6_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOQ0_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOQ0_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOQ1_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOQ1_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOQ2_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOQ2_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOQ4_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOQ4_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOQ5_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOQ5_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol SHAMD5_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol SHAMD5_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol AES_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol AES_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol DES3DES_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol DES3DES_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol LCDCONTROLLER_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol LCDCONTROLLER_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER6A_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER6A_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER7A_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER7A_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol HIMSCANKEYBOARD_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol HIMSCANKEYBOARD_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER7B_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol TIMER7B_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol I2C6_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol I2C6_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol I2C7_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol I2C7_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol ONEWIRE_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol ONEWIRE_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol HIMPS2_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol HIMPS2_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol HIMCONSUMERIR_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol HIMCONSUMERIR_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol I2C8_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol I2C8_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol I2C9_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol I2C9_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOT_Handler defined in .text(startup_tm4c129_template.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Warning: L6439W: Multiply defined Global Symbol GPIOT_Handler defined in .text(startup_tm4c129.o) rejected in favor of Symbol defined in .text(startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol max_size multiply defined (by heap.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _kinit multiply defined (by heap.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol printArray multiply defined (by heap.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol m2a multiply defined (by heap.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol a2m multiply defined (by heap.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol array multiply defined (by heap.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol mcb_top multiply defined (by heap.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _ralloc multiply defined (by heap.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _rfree multiply defined (by heap.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _kalloc multiply defined (by heap.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _kalloc multiply defined (by heap_template_1.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol mcb_bot multiply defined (by heap.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _kfree multiply defined (by heap.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _kfree multiply defined (by heap_template_1.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol heap_top multiply defined (by heap.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol heap_bot multiply defined (by heap.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _signal multiply defined (by stdlib_template.o and stdlib_midpoint.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _signal multiply defined (by svc_template.o and stdlib_midpoint.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _malloc multiply defined (by heap.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _malloc multiply defined (by stdlib_midpoint.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _malloc multiply defined (by stdlib_template.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _malloc multiply defined (by svc_template.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _bzero multiply defined (by stdlib_template.o and stdlib_midpoint.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _bzero multiply defined (by svc_template.o and stdlib_midpoint.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _free multiply defined (by heap.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _free multiply defined (by stdlib_midpoint.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _free multiply defined (by stdlib_template.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _free multiply defined (by svc_template.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol mcb_ent_sz multiply defined (by heap.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol min_size multiply defined (by heap.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol mcb_total multiply defined (by heap.o and heap_template.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol __Vectors_Size multiply defined (by startup_tm4c129_template.o and startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol __Vectors_Size multiply defined (by startup_tm4c129.o and startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _strncpy multiply defined (by stdlib_template.o and stdlib_midpoint.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _strncpy multiply defined (by svc_template.o and stdlib_midpoint.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _alarm multiply defined (by stdlib_template.o and stdlib_midpoint.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol _alarm multiply defined (by svc_template.o and stdlib_midpoint.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol __user_initial_stackheap multiply defined (by startup_tm4c129_template.o and startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol __user_initial_stackheap multiply defined (by startup_tm4c129.o and startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol __Vectors multiply defined (by startup_tm4c129_template.o and startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol __Vectors multiply defined (by startup_tm4c129.o and startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol __Vectors_End multiply defined (by startup_tm4c129_template.o and startup_tm4c129_midpoint.o).
+.\Objects\Final_Project.axf: Error: L6200E: Symbol __Vectors_End multiply defined (by startup_tm4c129.o and startup_tm4c129_midpoint.o).
 Not enough information to list image symbols.
 Not enough information to list load addresses in the image map.
-Finished: 2 information, 0 warning, 0 error and 1 fatal error messages.
-".\Objects\Final_Project.axf" - 1 Error(s), 0 Warning(s).
+Finished: 2 information, 262 warning and 43 error messages.
+".\Objects\Final_Project.axf" - 43 Error(s), 262 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -81,7 +369,7 @@ Package Vendor: Keil
       Source file:   Device/Source/ARM/startup_TM4C129.s
       Source file:   Device/Source/system_TM4C129.c
 Target not created.
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

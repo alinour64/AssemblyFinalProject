@@ -408,6 +408,11 @@
           <GroupName>Thumb2_Programs</GroupName>
           <Files>
             <File>
+              <FileName>timer_template.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Assembly_Final_Project_Files\Thumb2_Programs\timer_template.s</FilePath>
+            </File>
+            <File>
               <FileName>heap_template.s</FileName>
               <FileType>2</FileType>
               <FilePath>.\Assembly_Final_Project_Files\Thumb2_Programs\heap_template.s</FilePath>
@@ -436,11 +441,6 @@
               <FileName>svc_template.s</FileName>
               <FileType>2</FileType>
               <FilePath>.\Assembly_Final_Project_Files\Thumb2_Programs\svc_template.s</FilePath>
-            </File>
-            <File>
-              <FileName>timer_template.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\Assembly_Final_Project_Files\Thumb2_Programs\timer_template.s</FilePath>
             </File>
           </Files>
         </Group>

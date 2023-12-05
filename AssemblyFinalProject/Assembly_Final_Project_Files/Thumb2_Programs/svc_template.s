@@ -12,6 +12,29 @@ SYS_MALLOC		EQU		0x4		; address 20007B10
 SYS_FREE		EQU		0x5		; address 20007B14
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	EXPORT _bzero
+_bzero
+    MOV pc, lr
+
+	EXPORT _strncpy
+_strncpy
+    MOV pc, lr
+
+	EXPORT _malloc
+_malloc
+    MOV pc, lr
+
+	EXPORT _free
+_free
+    MOV pc, lr
+
+	EXPORT _signal
+_signal
+    MOV pc, lr
+
+	EXPORT _alarm
+_alarm
+    MOV pc, lr
 ; System Call Table Initialization
 _sys_exit
     BX      lr
