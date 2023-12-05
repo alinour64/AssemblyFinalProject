@@ -219,8 +219,17 @@ Reset_Handler   PROC
         	BLX     R0
 
 		; Initialize the system call table (Step 2)
+		LDR     R0, =_syscall_table_init
+		BLX     R0
+
 		; Initialize the heap space (Step 2)
+		LDR     R0, =_heap_init
+		BLX     R0
+
 		; Initialize the SysTick timer (Step 2)
+		LDR     R0, =_timer_init
+		BLX     R0
+
 	
 		; Store __initial_user_sp into PSP (Step 1 toward Midpoint Report)
 		LDR	R0, =__initial_user_sp
@@ -260,14 +269,29 @@ UsageFault_Handler\
                 EXPORT  UsageFault_Handler        [WEAK]
                 B       .
                 ENDP
-SVC_Handler     PROC 		; (Step 2)
-        	EXPORT  SVC_Handler               [WEAK]
+SVC_Handler PROC
+    EXPORT SVC_Handler [WEAK]
 		; Save registers 
 		; Invoke _syscall_table_ump
 		; Retrieve registers
 		; Go back to stdlib.s
-                B       .
-                ENDP
+    PUSH {R4-R11, LR}
+    MRS R0, PSP             
+    LDR R1, [R0, #24]    
+    SUB R1, R1, #2        
+    LDRB R1, [R1]         
+    
+    LDR R2, =SYSTEMCALLTBL 
+    LSL R1, R1, #2
+    ADD R2, R2, R1   
+    LDR R2, [R2]         
+    BLX R2                 
+
+    POP {R4-R11, LR}
+    BX LR
+
+ENDP
+
 DebugMon_Handler\
                 PROC
                 EXPORT  DebugMon_Handler          [WEAK]
@@ -286,8 +310,15 @@ SysTick_Handler\
 		; Retrieve registers
 		; Change from MSP to PSP
 		; Go back to the user program
-                B       .
-                ENDP
+		PUSH {R4-R11, LR}
+		BL _timer_update
+		POP {R4-R11, LR}
+		MRS R0, CONTROL 
+		ORRS R0, R0, #0x02
+		MSR CONTROL, R0
+		ISB   
+        BX LR    .
+        ENDP
 
 GPIOA_Handler\
                 PROC

@@ -402,16 +402,6 @@
               <FileType>1</FileType>
               <FilePath>.\Assembly_Final_Project_Files\C_Programs\driver_keil.c</FilePath>
             </File>
-            <File>
-              <FileName>driver_cpg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Assembly_Final_Project_Files\C_Programs\driver_cpg.c</FilePath>
-            </File>
-            <File>
-              <FileName>driver.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Assembly_Final_Project_Files\C_Programs\driver.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

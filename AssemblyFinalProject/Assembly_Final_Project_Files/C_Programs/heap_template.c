@@ -93,19 +93,22 @@ int _rfree( int mcb_addr ) {
  * be called from Reset_Handler in startup_TM4C129.s before you invoke
  * driver.c's main( ).
  */
-void _kinit( ) {
-  // Zeroing the heap space: no need to implement in step 2's assembly code.
-  for ( int i = 0x20001000; i < 0x20005000; i++ )
-    array[ m2a( i ) ] = 0;
+void _kinit() {
+    // Zeroing the heap space: no need to implement in step 2's assembly code.
+    for (int heap_i = 0x20001000; heap_i < 0x20005000; heap_i++) {
+        array[m2a(heap_i)] = 0;
+    }
 
-  // Initializing MCB: you need to implement in step 2's assembly code.
-  *(short *)&array[ m2a( mcb_top ) ] = max_size;
-    
-  for ( int i = 0x20006804; i < 0x20006C00; i += 2 ) {
-    array[ m2a( i ) ] = 0;
-    array[ m2a( i + 1) ] = 0;
-  }
+    // Initializing MCB: you need to implement in step 2's assembly code.
+    *(short *)&array[m2a(mcb_top)] = max_size;
+
+    // Use a different loop variable here to avoid redeclaration of 'i'
+    for (int mcb_i = 0x20006804; mcb_i < 0x20006C00; mcb_i += 2) {
+        array[m2a(mcb_i)] = 0;
+        array[m2a(mcb_i + 1)] = 0;
+    }
 }
+
 
 /*
  * Step 2 should call _kalloc from SVC_Handler.
