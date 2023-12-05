@@ -388,16 +388,6 @@
           <GroupName>C_Programs</GroupName>
           <Files>
             <File>
-              <FileName>heap_template.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Assembly_Final_Project_Files\C_Programs\heap_template.c</FilePath>
-            </File>
-            <File>
-              <FileName>heap.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Assembly_Final_Project_Files\C_Programs\heap.c</FilePath>
-            </File>
-            <File>
               <FileName>driver_keil.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Assembly_Final_Project_Files\C_Programs\driver_keil.c</FilePath>
@@ -418,29 +408,19 @@
               <FilePath>.\Assembly_Final_Project_Files\Thumb2_Programs\heap_template.s</FilePath>
             </File>
             <File>
-              <FileName>startup_TM4C129_midpoint.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\Assembly_Final_Project_Files\Thumb2_Programs\startup_TM4C129_midpoint.s</FilePath>
-            </File>
-            <File>
-              <FileName>startup_TM4C129_template.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\Assembly_Final_Project_Files\Thumb2_Programs\startup_TM4C129_template.s</FilePath>
-            </File>
-            <File>
               <FileName>stdlib_midpoint.s</FileName>
               <FileType>2</FileType>
               <FilePath>.\Assembly_Final_Project_Files\Thumb2_Programs\stdlib_midpoint.s</FilePath>
             </File>
             <File>
-              <FileName>stdlib_template.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\Assembly_Final_Project_Files\Thumb2_Programs\stdlib_template.s</FilePath>
-            </File>
-            <File>
               <FileName>svc_template.s</FileName>
               <FileType>2</FileType>
               <FilePath>.\Assembly_Final_Project_Files\Thumb2_Programs\svc_template.s</FilePath>
+            </File>
+            <File>
+              <FileName>startup_TM4C129_midpoint.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Assembly_Final_Project_Files\Thumb2_Programs\startup_TM4C129_midpoint.s</FilePath>
             </File>
           </Files>
         </Group>
