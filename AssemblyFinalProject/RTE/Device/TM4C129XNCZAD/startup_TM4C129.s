@@ -202,10 +202,10 @@ __Vectors_Size  EQU     __Vectors_End - __Vectors
 ; Reset Handler
 Reset_Handler   PROC
                 EXPORT  Reset_Handler             [WEAK]
-				IMPORT  _kinit
                 IMPORT  SystemInit
                 IMPORT  __main
                 IMPORT  _syscall_table_init
+				IMPORT  _kinit
                 IMPORT  _heap_init
                 IMPORT  _timer_init
                 
@@ -220,11 +220,11 @@ Reset_Handler   PROC
                 BLX     R0
 
                 ; Initialize system call table
-                LDR     R0, =_syscall_table_init
+                LDR     R0, =_kinit
                 BLX     R0
 
                 ; Initialize heap
-                LDR     R0, =_kinit
+                LDR     R0, =_syscall_table_init
                 BLX     R0
 
                 ; Initialize timer
@@ -274,7 +274,7 @@ UsageFault_Handler\
                 ENDP
 SVC_Handler PROC
 				EXPORT SVC_Handler [WEAK]
-				EXTERN _system_call_table_jump
+				EXTERN _syscall_table_jump
 
 				; Save registers
 				PUSH {R4-R11, LR}
@@ -286,7 +286,7 @@ SVC_Handler PROC
 				LDRB R1, [R1]
 
 				; Call system call table jump function
-				LDR R2, =_system_call_table_jump
+				LDR R2, =_syscall_table_jump
 				BLX R2
 
 				; Restore registers and return

@@ -1,7 +1,7 @@
 --cpu=Cortex-M4.fp.sp
+".\objects\svc_template.o"
 ".\objects\heap_template_1.o"
 ".\objects\stdlib_midpoint.o"
-".\objects\svc_template.o"
 ".\objects\timer_template.o"
 ".\objects\driver_keil.o"
 ".\objects\startup_tm4c129.o"
