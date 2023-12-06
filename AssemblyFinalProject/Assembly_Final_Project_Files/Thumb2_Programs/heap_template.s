@@ -135,11 +135,21 @@ InvalidAddress
         MOV     R0, #0                    
         POP     {R4-R7, PC}                
 
-	_rfree
-
+		BL 		_rfree
         END
 
+<<<<<<< HEAD
         
+=======
+
+        EXPORT _kinit
+_kinit
+        PUSH    {R4-R7, LR}        
+        LDR     R0, =0x20006800    
+        MOV     R1, #0x4000         
+        STRH    R1, [R0]            
+        ADD     R0, R0, #2           
+>>>>>>> 8c5831d4d71b8a567ca82c4ddbad8a030889b498
 ZeroLoop
         CMP     R0, #0x20006BFE     
         BGE     DoneZeroing           
