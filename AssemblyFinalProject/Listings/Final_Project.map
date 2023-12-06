@@ -151,12 +151,12 @@ Section Cross References
 
 Removing Unused input sections from the image.
 
+    Removing svc_template.o(.text), (2 bytes).
     Removing driver_keil.o(.text), (0 bytes).
     Removing driver_keil.o(.ARM.exidx.text.sig_handler1), (8 bytes).
     Removing driver_keil.o(.ARM.exidx.text.sig_handler2), (8 bytes).
     Removing driver_keil.o(.ARM.exidx.text.main), (8 bytes).
     Removing driver_keil.o(.ARM.use_no_argv), (4 bytes).
-    Removing svc_template.o(.text), (2 bytes).
     Removing startup_tm4c129.o(RESET), (512 bytes).
     Removing system_tm4c129.o(.text), (0 bytes).
     Removing system_tm4c129.o(.text.SystemCoreClockUpdate), (20 bytes).

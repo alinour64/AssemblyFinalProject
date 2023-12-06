@@ -201,12 +201,13 @@ __Vectors_Size  EQU     __Vectors_End - __Vectors
 ; Reset Handler
 Reset_Handler   PROC
                 EXPORT  Reset_Handler             [WEAK]
+				IMPORT  _kinit
                 IMPORT  SystemInit
                 IMPORT  __main
                 IMPORT  _syscall_table_init
                 IMPORT  _heap_init
                 IMPORT  _timer_init
-                IMPORT  _kinit
+                
 
                 ; Initialize the Main Stack Pointer (MSP)
                 LDR     R0, =__initial_sp
