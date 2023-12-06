@@ -25,40 +25,39 @@
 ;//-------- <<< Use Configuration Wizard in Context Menu >>> ------------------
 ;*/
 
-
-; <h> Stack Configuration
-;   <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
-; </h>
-
-Stack_Size      EQU     0x00000200
-
-                AREA    STACK, NOINIT, READWRITE, ALIGN=3
-Stack_Mem       SPACE   Stack_Size
-__initial_sp
-
-
 ; <h> Heap Configuration
 ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
 ; </h>
 
-Heap_Size       EQU     0x00000000
+Heap_Size       EQU     0x00005000
 
                 AREA    HEAP, NOINIT, READWRITE, ALIGN=3
 __heap_base
 Heap_Mem        SPACE   Heap_Size
 __heap_limit
 
+; <h> Stack Configuration
+;   <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
+; </h>
+
+Handler_Stack_Size      EQU     0x00000800
+Thread_Stack_Size	EQU	0x00000800	
+
+                AREA    STACK, NOINIT, READWRITE, ALIGN=3
+
+Thread_Stack_Mem		SPACE	Thread_Stack_Size
+__initial_user_sp
+Handler_Stack_Mem       SPACE   Handler_Stack_Size
+__initial_sp
+
 
                 PRESERVE8
                 THUMB
 
-
 ; Vector Table Mapped to Address 0 at Reset
 
                 AREA    RESET, DATA, READONLY
-                EXPORT  __Vectors
-                EXPORT  __Vectors_End
-                EXPORT  __Vectors_Size
+
 
 __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     Reset_Handler             ; Reset Handler
@@ -200,13 +199,46 @@ __Vectors_Size  EQU     __Vectors_End - __Vectors
 
 
 ; Reset Handler
-
 Reset_Handler   PROC
                 EXPORT  Reset_Handler             [WEAK]
                 IMPORT  SystemInit
                 IMPORT  __main
+                IMPORT  _syscall_table_init
+                IMPORT  _heap_init
+                IMPORT  _timer_init
+                IMPORT  _kinit
+
+                ; Initialize the Main Stack Pointer (MSP)
+                LDR     R0, =__initial_sp
+                MSR     MSP, R0
+                ISB
+
+                ; System Initialization Call
                 LDR     R0, =SystemInit
                 BLX     R0
+
+                ; Initialize system call table
+                LDR     R0, =_syscall_table_init
+                BLX     R0
+
+                ; Initialize heap
+                LDR     R0, =_kinit
+                BLX     R0
+
+                ; Initialize timer
+                LDR     R0, =_timer_init
+                BLX     R0
+
+                ; Initialize the Process Stack Pointer (PSP)
+                LDR     R0, =__initial_user_sp
+                MSR     PSP, R0
+
+                ; Switch to use PSP and unprivileged mode
+                MOVS    R0, #3          ; Set CONTROL to switch to PSP and unprivileged mode
+                MSR     CONTROL, R0
+                ISB                     ; Instruction Synchronization Barrier
+
+                ; Branch to __main
                 LDR     R0, =__main
                 BX      R0
                 ENDP
@@ -238,10 +270,29 @@ UsageFault_Handler\
                 EXPORT  UsageFault_Handler        [WEAK]
                 B       .
                 ENDP
-SVC_Handler     PROC
-                EXPORT  SVC_Handler               [WEAK]
-                B       .
-                ENDP
+SVC_Handler PROC
+    EXPORT SVC_Handler [WEAK]
+    IMPORT _system_call_table_jump
+
+    ; Save registers
+    PUSH {R4-R11, LR}
+
+    ; Retrieve the value of the Program Counter to get the SVC number
+    MRS R0, PSP
+    LDR R1, [R0, #24]
+    SUB R1, R1, #2
+    LDRB R1, [R1]
+
+    ; Call system call table jump function
+    LDR R2, =_system_call_table_jump
+    BLX R2
+
+    ; Restore registers and return
+    POP {R4-R11, LR}
+    BX LR
+	ENDP
+
+
 DebugMon_Handler\
                 PROC
                 EXPORT  DebugMon_Handler          [WEAK]
@@ -252,11 +303,22 @@ PendSV_Handler\
                 EXPORT  PendSV_Handler            [WEAK]
                 B       .
                 ENDP
-SysTick_Handler\
-                PROC
-                EXPORT  SysTick_Handler           [WEAK]
-                B       .
-                ENDP
+SysTick_Handler PROC
+    EXPORT SysTick_Handler [WEAK]
+    IMPORT _timer_update
+
+    ; Save registers
+    PUSH {R4-R11, LR}
+
+    ; Call timer update function
+    BL _timer_update
+
+    ; Restore registers and return
+    POP {R4-R11, LR}
+    BX LR
+ENDP
+
+
 
 GPIOA_Handler\
                 PROC
@@ -992,20 +1054,19 @@ GPIOT_Handler\
 
                 IF      :DEF:__MICROLIB
 
-                EXPORT  __initial_sp
+                EXPORT  __initial_user_sp
                 EXPORT  __heap_base
                 EXPORT  __heap_limit
 
                 ELSE
 
                 IMPORT  __use_two_region_memory
-                EXPORT  __user_initial_stackheap
 __user_initial_stackheap
 
                 LDR     R0, =  Heap_Mem
-                LDR     R1, =(Stack_Mem + Stack_Size)
+                LDR     R1, =(Thread_Stack_Mem + Thread_Stack_Size)
                 LDR     R2, = (Heap_Mem +  Heap_Size)
-                LDR     R3, = Stack_Mem
+                LDR     R3, = Thread_Stack_Mem
                 BX      LR
 
                 ALIGN

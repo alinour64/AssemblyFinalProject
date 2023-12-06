@@ -171,7 +171,7 @@
 
   <Group>
     <GroupName>Source Group 1</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -222,8 +222,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\Assembly_Final_Project_Files\Thumb2_Programs\heap_template.s</PathWithFileName>
-      <FilenameWithoutPath>heap_template.s</FilenameWithoutPath>
+      <PathWithFileName>.\Assembly_Final_Project_Files\Thumb2_Programs\stdlib_midpoint.s</PathWithFileName>
+      <FilenameWithoutPath>stdlib_midpoint.s</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -231,11 +231,11 @@
       <GroupNumber>3</GroupNumber>
       <FileNumber>4</FileNumber>
       <FileType>2</FileType>
-      <tvExp>0</tvExp>
+      <tvExp>1</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\Assembly_Final_Project_Files\Thumb2_Programs\stdlib_midpoint.s</PathWithFileName>
-      <FilenameWithoutPath>stdlib_midpoint.s</FilenameWithoutPath>
+      <PathWithFileName>.\Assembly_Final_Project_Files\Thumb2_Programs\heap_template.s</PathWithFileName>
+      <FilenameWithoutPath>heap_template.s</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -248,18 +248,6 @@
       <bDave2>0</bDave2>
       <PathWithFileName>.\Assembly_Final_Project_Files\Thumb2_Programs\svc_template.s</PathWithFileName>
       <FilenameWithoutPath>svc_template.s</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>3</GroupNumber>
-      <FileNumber>6</FileNumber>
-      <FileType>2</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\Assembly_Final_Project_Files\Thumb2_Programs\startup_TM4C129_midpoint.s</PathWithFileName>
-      <FilenameWithoutPath>startup_TM4C129_midpoint.s</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
