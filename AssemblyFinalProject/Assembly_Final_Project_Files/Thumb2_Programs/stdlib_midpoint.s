@@ -64,12 +64,12 @@ _strncpy_return
 ;   	void*	a pointer to the allocated space
 	EXPORT _malloc
 _malloc
-    PUSH {R4-R11, LR}    ; Save registers and LR for return
-    MOV R7, #3           ; Set the system call number for malloc in R7
-    MOV R0, R0           ; Size is already in R0, as per calling convention
-    SVC #0               ; Perform system call for memory allocation
-    POP {R4-R11, LR}     ; Restore saved registers and LR
-    MOV PC, LR           ; Return
+    PUSH {R4-R11, LR}   
+    MOV R7, #3           
+    MOV R0, R0         
+    SVC #0              
+    POP {R4-R11, LR}     
+    MOV PC, LR         
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; void _free( void* addr )
@@ -79,13 +79,13 @@ _malloc
 ;   	none
 		EXPORT _free
 _free
-    PUSH {R4-R7, LR}    ; Save registers and LR
-    MOV R4, R0          ; Move addr to R4 for safe-keeping
-    LDR R7, =4          ; Load the system call number for _free into R7
-    MOV R0, R4          ; Restore addr from R4 to R0
-    SVC #0x0            ; Supervisor call
-    POP {R4-R7, LR}     ; Restore registers and LR
-    MOV PC, LR          ; Return
+    PUSH {R4-R7, LR}  
+    MOV R4, R0         
+    LDR R7, =4          
+    MOV R0, R4         
+    SVC #0x0           
+    POP {R4-R7, LR}    
+    MOV PC, LR         
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; unsigned int _alarm( unsigned int seconds )
@@ -98,11 +98,11 @@ _free
 		EXPORT	_alarm
 _alarm
     PUSH {R4-R7, LR}       
-    MOV R0, R0              ; Seconds is already in R0, as per calling convention
-    LDR R7, =1              ; Load the system call number for _alarm into R7
-    SVC #0x0                ; Supervisor call
+    MOV R0, R0              
+    LDR R7, =1              
+    SVC #0x0               
     POP {R4-R7, LR}         
-    MOV PC, LR              ; Return from the function
+    MOV PC, LR             
 
 
 			
@@ -116,15 +116,15 @@ _alarm
 ;             (the same as the 2nd parameter in this project)
 		EXPORT _signal
 _signal
-    PUSH {R4-R7, LR}         ; Save registers and LR
-    MOV R4, R0               ; Move signum to R4 for safe-keeping
-    MOV R5, R1               ; Move handler to R5 for safe-keeping
-    LDR R7, =2               ; Load the system call number for _signal into R7
-    MOV R0, R4               ; Restore signum from R4 to R0
-    MOV R1, R5               ; Restore handler from R5 to R1
-    SVC #0x0                 ; Supervisor call
-    POP {R4-R7, LR}          ; Restore registers and LR
-    MOV PC, LR               ; Return from the function
+    PUSH {R4-R7, LR}      
+    MOV R4, R0             
+    MOV R5, R1          
+    LDR R7, =2              
+    MOV R0, R4             
+    MOV R1, R5       
+    SVC #0x0            
+    POP {R4-R7, LR}         
+    MOV PC, LR             
 
 	
 
