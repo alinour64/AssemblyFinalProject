@@ -138,7 +138,6 @@ InvalidAddress
 		BL 		_rfree
         END
 
-<<<<<<< HEAD
         
 =======
 
@@ -149,7 +148,7 @@ _kinit
         MOV     R1, #0x4000         
         STRH    R1, [R0]            
         ADD     R0, R0, #2           
->>>>>>> 8c5831d4d71b8a567ca82c4ddbad8a030889b498
+
 ZeroLoop
         CMP     R0, #0x20006BFE     
         BGE     DoneZeroing           
