@@ -25,6 +25,7 @@ Section Cross References
     startup_tm4c129.o(.text) refers to startup_tm4c129.o(STACK) for __initial_sp
     startup_tm4c129.o(.text) refers to system_tm4c129.o(.text.SystemInit) for SystemInit
     startup_tm4c129.o(.text) refers to __main.o(!!!main) for __main
+    startup_tm4c129.o(.text) refers to svc_template.o(.text) for _syscall_table_jump
     startup_tm4c129.o(.text) refers to startup_tm4c129.o(HEAP) for Heap_Mem
     system_tm4c129.o(.text.SystemCoreClockUpdate) refers to system_tm4c129.o(.data.SystemCoreClock) for SystemCoreClock
     system_tm4c129.o(.ARM.exidx.text.SystemCoreClockUpdate) refers to system_tm4c129.o(.text.SystemCoreClockUpdate) for [Anonymous Symbol]
@@ -143,7 +144,6 @@ Section Cross References
 
 Removing Unused input sections from the image.
 
-    Removing svc_template.o(.text), (2 bytes).
     Removing driver_keil.o(.text), (0 bytes).
     Removing driver_keil.o(.ARM.exidx.text.sig_handler1), (8 bytes).
     Removing driver_keil.o(.ARM.exidx.text.sig_handler2), (8 bytes).
@@ -154,4 +154,4 @@ Removing Unused input sections from the image.
     Removing system_tm4c129.o(.ARM.exidx.text.SystemCoreClockUpdate), (8 bytes).
     Removing system_tm4c129.o(.ARM.exidx.text.SystemInit), (8 bytes).
 
-10 unused section(s) (total 66 bytes) removed from the image.
+9 unused section(s) (total 64 bytes) removed from the image.

@@ -17,6 +17,14 @@ INVALID		EQU		-1			; an invalid id
 	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Memory Control Block Initialization
+        EXPORT _kinit
+_kinit
+        PUSH    {R4-R7, LR}        
+        LDR     R0, =0x20006800    
+        MOV     R1, #0x4000         
+        STRH    R1, [R0]            
+        ADD     R0, R0, #2   
+		
 		EXPORT	_heap_init
 _heap_init
         PUSH    {R4-R7, LR}            
@@ -131,13 +139,7 @@ InvalidAddress
 
         END
 
-        EXPORT _kinit
-_kinit
-        PUSH    {R4-R7, LR}        
-        LDR     R0, =0x20006800    
-        MOV     R1, #0x4000         
-        STRH    R1, [R0]            
-        ADD     R0, R0, #2           
+        
 ZeroLoop
         CMP     R0, #0x20006BFE     
         BGE     DoneZeroing           
