@@ -29,15 +29,56 @@ Project File Date:  12/05/2023
 Build target 'Target 1'
 Note: source file '.\Assembly_Final_Project_Files\Thumb2_Programs\heap_template.s' - object file renamed from '.\Objects\heap_template.o' to '.\Objects\heap_template_1.o'.
 Note: source file '.\Assembly_Final_Project_Files\Thumb2_Programs\heap_template.s' - object file renamed from '.\Objects\heap_template.o' to '.\Objects\heap_template_1.o'.
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(5): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+extern void* _memcpy( );
+                    ^
+                      void
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(13): warning: unused parameter 'signum' [-Wunused-parameter]
+void sig_handler1( int signum ) {
+                       ^
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(13): warning: no previous prototype for function 'sig_handler1' [-Wmissing-prototypes]
+void sig_handler1( int signum ) {
+     ^
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(13): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void sig_handler1( int signum ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(17): warning: unused parameter 'signum' [-Wunused-parameter]
+void sig_handler2( int signum ) {
+                       ^
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(17): warning: no previous prototype for function 'sig_handler2' [-Wmissing-prototypes]
+void sig_handler2( int signum ) {
+     ^
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(17): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void sig_handler2( int signum ) {
+^
+static 
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(21): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+int main( ) {
+        ^
+          void
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(24): warning: // comments are not allowed in this language [-Wcomment]
+        //_bzero( stringB, 40 );
+        ^
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(27): warning: mixing declarations and code is a C99 extension [-Wdeclaration-after-statement]
+        void* mem1 = _malloc( 1024 );
+              ^
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(11): warning: no previous extern declaration for non-static variable 'alarmed' [-Wmissing-variable-declarations]
+int* alarmed;
+     ^
+Assembly_Final_Project_Files/C_Programs/driver_keil.c(11): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int* alarmed;
+^
+9 warnings generated.
+compiling driver_keil.c...
 linking...
-.\Objects\Final_Project.axf: Warning: L6320W: Ignoring --first command. Cannot find argument '__Vectors'.
 .\Objects\Final_Project.axf: Error: L6218E: Undefined symbol _kinit (referred from startup_tm4c129.o).
 .\Objects\Final_Project.axf: Error: L6218E: Undefined symbol _syscall_table_init (referred from startup_tm4c129.o).
 .\Objects\Final_Project.axf: Error: L6218E: Undefined symbol _system_call_table_jump (referred from startup_tm4c129.o).
 Not enough information to list image symbols.
 Not enough information to list load addresses in the image map.
-Finished: 2 information, 1 warning and 3 error messages.
-".\Objects\Final_Project.axf" - 3 Error(s), 1 Warning(s).
+Finished: 2 information, 0 warning and 3 error messages.
+".\Objects\Final_Project.axf" - 3 Error(s), 9 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -63,11 +104,11 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.6.0
 
    * Component: Keil::Device:Startup:1.0.0
-      Source file:   Device/Source/ARM/startup_TM4C129.s
       Include file:  Device/Include/TM4C129/TM4C129.h
       Source file:   Device/Source/system_TM4C129.c
+      Source file:   Device/Source/ARM/startup_TM4C129.s
 Target not created.
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

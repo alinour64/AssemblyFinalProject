@@ -57,8 +57,9 @@ __initial_sp
 ; Vector Table Mapped to Address 0 at Reset
 
                 AREA    RESET, DATA, READONLY
-
-
+                EXPORT  __Vectors
+                EXPORT  __Vectors_End
+                EXPORT  __Vectors_Size
 __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     Reset_Handler             ; Reset Handler
                 DCD     NMI_Handler               ; NMI Handler
@@ -272,26 +273,26 @@ UsageFault_Handler\
                 B       .
                 ENDP
 SVC_Handler PROC
-    EXPORT SVC_Handler [WEAK]
-    IMPORT _system_call_table_jump
+				EXPORT SVC_Handler [WEAK]
+				EXTERN _system_call_table_jump
 
-    ; Save registers
-    PUSH {R4-R11, LR}
+				; Save registers
+				PUSH {R4-R11, LR}
 
-    ; Retrieve the value of the Program Counter to get the SVC number
-    MRS R0, PSP
-    LDR R1, [R0, #24]
-    SUB R1, R1, #2
-    LDRB R1, [R1]
+				; Retrieve the value of the Program Counter to get the SVC number
+				MRS R0, PSP
+				LDR R1, [R0, #24]
+				SUB R1, R1, #2
+				LDRB R1, [R1]
 
-    ; Call system call table jump function
-    LDR R2, =_system_call_table_jump
-    BLX R2
+				; Call system call table jump function
+				LDR R2, =_system_call_table_jump
+				BLX R2
 
-    ; Restore registers and return
-    POP {R4-R11, LR}
-    BX LR
-	ENDP
+				; Restore registers and return
+				POP {R4-R11, LR}
+				BX LR
+				ENDP
 
 
 DebugMon_Handler\
@@ -306,7 +307,7 @@ PendSV_Handler\
                 ENDP
 SysTick_Handler PROC
     EXPORT SysTick_Handler [WEAK]
-    IMPORT _timer_update
+    EXTERN _timer_update
 
     ; Save registers
     PUSH {R4-R11, LR}
@@ -317,7 +318,7 @@ SysTick_Handler PROC
     ; Restore registers and return
     POP {R4-R11, LR}
     BX LR
-ENDP
+	ENDP
 
 
 
@@ -1061,7 +1062,8 @@ GPIOT_Handler\
 
                 ELSE
 
-                IMPORT  __use_two_region_memory
+                EXTERN  __use_two_region_memory
+				EXPORT  __user_initial_stackheap
 __user_initial_stackheap
 
                 LDR     R0, =  Heap_Mem

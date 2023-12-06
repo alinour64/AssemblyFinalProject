@@ -15,15 +15,11 @@ Section Cross References
     driver_keil.o(.text.main) refers to driver_keil.o(.text.sig_handler1) for sig_handler1
     driver_keil.o(.text.main) refers to driver_keil.o(.text.sig_handler2) for sig_handler2
     driver_keil.o(.ARM.exidx.text.main) refers to driver_keil.o(.text.main) for [Anonymous Symbol]
-    startup_tm4c129.o(HEAP) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_tm4c129.o(HEAP) refers (Special) to heap_template_1.o(.text) for _heap_init
-    startup_tm4c129.o(STACK) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_tm4c129.o(STACK) refers (Special) to heap_template_1.o(.text) for _heap_init
-    startup_tm4c129.o(RESET) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_tm4c129.o(RESET) refers (Special) to heap_template_1.o(.text) for _heap_init
     startup_tm4c129.o(RESET) refers to startup_tm4c129.o(STACK) for __initial_sp
     startup_tm4c129.o(RESET) refers to startup_tm4c129.o(.text) for Reset_Handler
-    startup_tm4c129.o(.text) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_tm4c129.o(.text) refers (Special) to heap_template_1.o(.text) for _heap_init
     startup_tm4c129.o(.text) refers to timer_template.o(.text) for _timer_update
     startup_tm4c129.o(.text) refers to startup_tm4c129.o(STACK) for __initial_sp
@@ -55,7 +51,7 @@ Section Cross References
     __rtentry4.o(.ARM.Collect$$rtentry$$00000004) refers to sys_stackheap_outer.o(.text) for __user_setup_stackheap
     __rtentry4.o(.ARM.exidx) refers to __rtentry4.o(.ARM.Collect$$rtentry$$00000004) for .ARM.Collect$$rtentry$$00000004
     sys_stackheap_outer.o(.text) refers to libspace.o(.text) for __user_perproc_libspace
-    sys_stackheap_outer.o(.text) refers to sys_stackheap.o(.text) for __user_initial_stackheap
+    sys_stackheap_outer.o(.text) refers to startup_tm4c129.o(.text) for __user_initial_stackheap
     exit.o(.text) refers to rtexit.o(.ARM.Collect$$rtexit$$00000000) for __rt_exit
     libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000030) for __rt_lib_init_alloca_1
     libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000002E) for __rt_lib_init_argv_1
@@ -80,10 +76,6 @@ Section Cross References
     libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000027) for __rt_lib_init_stdio_1
     libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000000E) for __rt_lib_init_user_alloc_1
     libspace.o(.text) refers to libspace.o(.bss) for __libspace_start
-    sys_stackheap.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
-    sys_stackheap.o(.text) refers to use_no_semi.o(.text) for __I$use$semihosting
-    sys_stackheap_hlt.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
-    sys_stackheap_hlt.o(.text) refers to use_no_semi.o(.text) for __I$use$semihosting
     rtexit.o(.ARM.Collect$$rtexit$$00000000) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000004) for __rt_exit_exit
     rtexit.o(.ARM.Collect$$rtexit$$00000000) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000003) for __rt_exit_ls
     rtexit.o(.ARM.Collect$$rtexit$$00000000) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000002) for __rt_exit_prels_1
@@ -157,10 +149,9 @@ Removing Unused input sections from the image.
     Removing driver_keil.o(.ARM.exidx.text.sig_handler2), (8 bytes).
     Removing driver_keil.o(.ARM.exidx.text.main), (8 bytes).
     Removing driver_keil.o(.ARM.use_no_argv), (4 bytes).
-    Removing startup_tm4c129.o(RESET), (512 bytes).
     Removing system_tm4c129.o(.text), (0 bytes).
     Removing system_tm4c129.o(.text.SystemCoreClockUpdate), (20 bytes).
     Removing system_tm4c129.o(.ARM.exidx.text.SystemCoreClockUpdate), (8 bytes).
     Removing system_tm4c129.o(.ARM.exidx.text.SystemInit), (8 bytes).
 
-11 unused section(s) (total 578 bytes) removed from the image.
+10 unused section(s) (total 66 bytes) removed from the image.
