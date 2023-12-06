@@ -127,9 +127,9 @@ InvalidAddress
         MOV     R0, #0                    
         POP     {R4-R7, PC}                
 
-	_rfree
-
+		BL 		_rfree
         END
+
 
         EXPORT _kinit
 _kinit
