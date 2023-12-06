@@ -3,8 +3,8 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; System Call Table
-HEAP_TOP	EQU		0x20001000
-HEAP_BOT	EQU		0x20004FE0
+HEAP_TOP	EQU		0x200057FF
+HEAP_BOT	EQU		0x20005000
 MAX_SIZE	EQU		0x00004000		; 16KB = 2^14
 MIN_SIZE	EQU		0x00000020		; 32B  = 2^5
 	

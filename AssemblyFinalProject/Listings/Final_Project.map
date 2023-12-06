@@ -305,12 +305,12 @@ Image Symbol Table
     .L__const.main.stringA                   0x00000978   Data          40  driver_keil.o(.rodata.str1.1)
     [Anonymous Symbol]                       0x00000978   Section        0  driver_keil.o(.rodata.str1.1)
     .bss                                     0x20000008   Section       96  libspace.o(.bss)
-    Heap_Mem                                 0x20000070   Data       20480  startup_tm4c129.o(HEAP)
-    HEAP                                     0x20000070   Section    20480  startup_tm4c129.o(HEAP)
-    Thread_Stack_Mem                         0x20005070   Data        2048  startup_tm4c129.o(STACK)
-    STACK                                    0x20005070   Section     4096  startup_tm4c129.o(STACK)
-    __initial_user_sp                        0x20005870   Data           0  startup_tm4c129.o(STACK)
-    __initial_sp                             0x20006070   Data           0  startup_tm4c129.o(STACK)
+    Heap_Mem                                 0x20000070   Data       16384  startup_tm4c129.o(HEAP)
+    HEAP                                     0x20000070   Section    16384  startup_tm4c129.o(HEAP)
+    STACK                                    0x20004070   Section     4096  startup_tm4c129.o(STACK)
+    Thread_Stack_Mem                         0x20004870   Data        2048  startup_tm4c129.o(STACK)
+    __initial_sp                             0x20004870   Data           0  startup_tm4c129.o(STACK)
+    __initial_user_sp                        0x20005070   Data           0  startup_tm4c129.o(STACK)
 
     Global Symbols
 
@@ -671,15 +671,15 @@ Memory Map of the image
     0x20000000   0x000009c0   0x00000004   Data   RW           44    .data.SystemCoreClock  system_tm4c129.o
 
 
-    Execution Region ER_ZI (Exec base: 0x20000008, Load base: 0x000009c4, Size: 0x00006068, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x20000008, Load base: 0x000009c4, Size: 0x00005068, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x20000008        -       0x00000060   Zero   RW           86    .bss                c_w.l(libspace.o)
     0x20000068        -       0x00000004   Zero   RW           23    .bss.alarmed        driver_keil.o
     0x2000006c   0x000009c4   0x00000004   PAD
-    0x20000070        -       0x00005000   Zero   RW           32    HEAP                startup_tm4c129.o
-    0x20005070        -       0x00001000   Zero   RW           33    STACK               startup_tm4c129.o
+    0x20000070        -       0x00004000   Zero   RW           32    HEAP                startup_tm4c129.o
+    0x20004070        -       0x00001000   Zero   RW           33    STACK               startup_tm4c129.o
 
 
 ==============================================================================
@@ -691,14 +691,14 @@ Image component sizes
 
        364          0         40          0          4       1449   driver_keil.o
        116         10          0          0          0        444   heap_template_1.o
-       404         52        512          0      24576       6148   startup_tm4c129.o
+       404         52        512          0      20480       6148   startup_tm4c129.o
        134          0          0          0          0        468   stdlib_midpoint.o
        204         52          0          0          0        488   svc_template.o
         36          0          0          4          0       1495   system_tm4c129.o
        108         22          0          0          0        588   timer_template.o
 
     ----------------------------------------------------------------------
-      1370        136        584          4      24584      11080   Object Totals
+      1370        136        584          4      20488      11080   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          4          0          0          0          4          0   (incl. Padding)
 
@@ -750,14 +750,14 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      1912        152        584          4      24680      11448   Grand Totals
-      1912        152        584          4      24680      11448   ELF Image Totals
+      1912        152        584          4      20584      11448   Grand Totals
+      1912        152        584          4      20584      11448   ELF Image Totals
       1912        152        584          4          0          0   ROM Totals
 
 ==============================================================================
 
     Total RO  Size (Code + RO Data)                 2496 (   2.44kB)
-    Total RW  Size (RW Data + ZI Data)             24684 (  24.11kB)
+    Total RW  Size (RW Data + ZI Data)             20588 (  20.11kB)
     Total ROM Size (Code + RO Data + RW Data)       2500 (   2.44kB)
 
 ==============================================================================

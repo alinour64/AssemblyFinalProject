@@ -29,26 +29,24 @@
 ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
 ; </h>
 
-Heap_Size       EQU     0x00005000
+; Heap Configuration
+Heap_Size       EQU     0x00004000
 
                 AREA    HEAP, NOINIT, READWRITE, ALIGN=3
 __heap_base
 Heap_Mem        SPACE   Heap_Size
 __heap_limit
 
-; <h> Stack Configuration
-;   <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
-; </h>
-
+; Stack Configuration
 Handler_Stack_Size      EQU     0x00000800
-Thread_Stack_Size	EQU	0x00000800	
+Thread_Stack_Size       EQU     0x00000800
 
                 AREA    STACK, NOINIT, READWRITE, ALIGN=3
-
-Thread_Stack_Mem		SPACE	Thread_Stack_Size
-__initial_user_sp
 Handler_Stack_Mem       SPACE   Handler_Stack_Size
-__initial_sp
+__initial_sp            ; Initial stack pointer for handler mode
+
+Thread_Stack_Mem        SPACE   Thread_Stack_Size
+__initial_user_sp       ; Initial stack pointer for thread mode
 
 
                 PRESERVE8
