@@ -214,7 +214,7 @@ Reset_Handler   PROC
                 BLX     R0
 
                 ; Initialize heap
-                LDR     R0, =_syscall_table_init
+                LDR     R0, =_heap_init
                 BLX     R0
 
                 ; Initialize timer
@@ -278,6 +278,7 @@ SVC_Handler PROC
 				; Call system call table jump function
 				LDR R2, =_syscall_table_jump
 				BLX R2
+
 
 				; Restore registers and return
 				POP {R4-R11, LR}

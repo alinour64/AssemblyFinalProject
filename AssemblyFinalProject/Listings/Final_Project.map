@@ -16,16 +16,16 @@ Section Cross References
     driver_keil.o(.text.main) refers to driver_keil.o(.text.sig_handler1) for sig_handler1
     driver_keil.o(.text.main) refers to driver_keil.o(.text.sig_handler2) for sig_handler2
     driver_keil.o(.ARM.exidx.text.main) refers to driver_keil.o(.text.main) for [Anonymous Symbol]
-    startup_tm4c129.o(HEAP) refers (Special) to heap_template_1.o(.text) for _heap_init
-    startup_tm4c129.o(STACK) refers (Special) to heap_template_1.o(.text) for _heap_init
-    startup_tm4c129.o(RESET) refers (Special) to heap_template_1.o(.text) for _heap_init
+    startup_tm4c129.o(HEAP) refers (Special) to svc_template.o(.text) for _syscall_table_init
+    startup_tm4c129.o(STACK) refers (Special) to svc_template.o(.text) for _syscall_table_init
+    startup_tm4c129.o(RESET) refers (Special) to svc_template.o(.text) for _syscall_table_init
     startup_tm4c129.o(RESET) refers to startup_tm4c129.o(STACK) for __initial_sp
     startup_tm4c129.o(RESET) refers to startup_tm4c129.o(.text) for Reset_Handler
-    startup_tm4c129.o(.text) refers (Special) to heap_template_1.o(.text) for _heap_init
+    startup_tm4c129.o(.text) refers (Special) to svc_template.o(.text) for _syscall_table_init
     startup_tm4c129.o(.text) refers to timer_template.o(.text) for _timer_update
     startup_tm4c129.o(.text) refers to startup_tm4c129.o(STACK) for __initial_sp
     startup_tm4c129.o(.text) refers to system_tm4c129.o(.text.SystemInit) for SystemInit
-    startup_tm4c129.o(.text) refers to svc_template.o(.text) for _syscall_table_init
+    startup_tm4c129.o(.text) refers to heap_template_1.o(.text) for _kinit
     startup_tm4c129.o(.text) refers to __main.o(!!!main) for __main
     startup_tm4c129.o(.text) refers to startup_tm4c129.o(HEAP) for Heap_Mem
     system_tm4c129.o(.text.SystemCoreClockUpdate) refers to system_tm4c129.o(.data.SystemCoreClock) for SystemCoreClock
