@@ -212,6 +212,10 @@ Reset_Handler   PROC
                 ; Initialize system call table
                 LDR     R0, =_kinit
                 BLX     R0
+				
+				LDR     R0, =_syscall_table_init
+                BLX     R0
+
 
                 ; Initialize heap
                 LDR     R0, =_heap_init
@@ -264,24 +268,22 @@ UsageFault_Handler\
                 ENDP
 SVC_Handler PROC
 				EXPORT SVC_Handler [WEAK]
-				EXTERN _syscall_table_jump
-
-				; Save registers
-				PUSH {R4-R11, LR}
-
-				; Retrieve the value of the Program Counter to get the SVC number
-				MRS R0, PSP
-				LDR R1, [R0, #24]
-				SUB R1, R1, #2
-				LDRB R1, [R1]
-
+				IMPORT _syscall_table_jump
+				
 				; Call system call table jump function
-				LDR R2, =_syscall_table_jump
-				BLX R2
+				LDR R1, =_syscall_table_jump
+				
+				; Save registers
+				PUSH {LR}
+				
+				BLX R1
+				
+				; Retrieve the value of the Program Counter to get the SVC number
+				MRS R1, PSP
+				STR R0,[R1]
+				
+				POP {LR}
 
-
-				; Restore registers and return
-				POP {R4-R11, LR}
 				BX LR
 				ENDP
 

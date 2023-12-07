@@ -65,9 +65,8 @@ _strncpy_return
 	EXPORT _malloc
 _malloc
     PUSH {R4-R11, LR}   
-    MOV R7, #3           
-    MOV R0, R0         
-    SVC #0              
+    MOV R7, #3         
+    SVC #0x0              
     POP {R4-R11, LR}     
     MOV PC, LR         
 

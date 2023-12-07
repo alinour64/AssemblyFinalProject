@@ -139,7 +139,6 @@ InvalidAddress
         END
 
         
-=======
 
         EXPORT _kinit
 _kinit
@@ -160,8 +159,8 @@ DoneZeroing
         POP     {R4-R7, PC}            
 
         END
-			
-			        EXPORT _ralloc
+		
+		EXPORT _ralloc
 _ralloc
         PUSH    {R4-R11, LR}              
 
@@ -210,3 +209,6 @@ AllocationDone
 
         END
 			
+			
+ ; 		EXPORT _ksignal
+ ;_ksignal

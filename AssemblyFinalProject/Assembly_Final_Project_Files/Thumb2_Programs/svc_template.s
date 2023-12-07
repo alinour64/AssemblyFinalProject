@@ -12,85 +12,80 @@ SYS_MALLOC		EQU		0x4		; address 20007B10
 SYS_FREE		EQU		0x5		; address 20007B14
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-    LDR     R0, =0x20007B00     
-    LDR     R1, =_sys_exit
-    STR     R1, [R0], #4      
-    LDR     R1, =_sys_alarm
-    STR     R1, [R0], #4
-    LDR     R1, =_sys_signal
-    STR     R1, [R0], #4
-    LDR     R1, =_sys_memcpy
-    STR     R1, [R0], #4
-    LDR     R1, =_sys_malloc
-    STR     R1, [R0], #4
-    LDR     R1, =_sys_free
-    STR     R1, [R0], #4
-
-
-_sys_exit
-    BX      LR
 	
-	EXTERN _alarm
+_sys_exit
+	PUSH    {LR}
+    BLX 	r11
+	POP    {LR}
+	BX LR
+	
+	IMPORT _alarm
 _sys_alarm
     PUSH    {LR}
     BL      _alarm
     POP     {PC}
-
-	EXTERN _signal
+	BX LR
+	
+	;IMPORT _ksignal
+	IMPORT _signal
 _sys_signal
-    MOV     R4, R0
-    MOV     R5, R1
-    BL      _signal
-    POP     {R4-R7, PC}
+	;DR R11, = _ksignal
+    LDR R11, = _signal
+    PUSH    {LR}
+    BLX      R11
+    POP     {PC}
+	BX LR
 
+	
+	IMPORT _strncpy
 _sys_memcpy
-    PUSH    {R4, LR}
-    MOV     R4, R2
-memcpy_loop
-    LDRB    R3, [R1], #1
-    STRB    R3, [R0], #1
-    SUBS    R4, R4, #1
-    BNE     memcpy_loop
-    POP     {R4, PC}
-
-	EXTERN _malloc
+	LDR R11, = _strncpy
+    PUSH    {LR}
+    BLX     R11
+    POP     {PC}
+	BX LR
+	
+	IMPORT _kalloc
 _sys_malloc
+	LDR R11, = _kalloc
     PUSH    {LR}
-    MOV     R0, R0
-    BL      _malloc
+    BLX     R11
     POP     {PC}
-
-	EXTERN _free
+	BX LR
+	
+	IMPORT _kfree
 _sys_free
+    LDR R11, = _kfree
     PUSH    {LR}
-    MOV     R0, R0
-    BL      _free
+    BLX     R11
     POP     {PC}
+	BX LR
 
-    EXPORT	_syscall_table_jump
+		EXPORT	_syscall_table_jump
 _syscall_table_jump
-    LDR     R1, =0x20007B00
-    LDR     R2, [R7]
-    LSL     R2, R2, #2
-    ADD     R1, R1, R2
-    LDR     R1, [R1]
-    BLX     R1
-    MOV     pc, lr
+		LDR		r11, = SYSTEMCALLTBL	; load the starting address of SYSTEMCALLTBL
+		MOV		r10, r7			; copy the system call number into r10
+		LSL		r10, #0x2		; system call number * 4, so that for malloc, it is 4, for free, it is 8
+		;;-------------------------------------------------
+		
+		ADD R10, R10, R11
+		LDR R1, [R10]
+		BLX R1
+		
+		;--------------------------------------------------
+		BX		lr				; return to SVC_Handler
 
     EXPORT	_syscall_table_init
 _syscall_table_init
-    LDR     R0, =0x20007B00     
+    LDR     R0, =SYSTEMCALLTBL   
+	
     LDR     R1, =_sys_exit
-    STR     R1, [R0], #4      
+    STR     R1, [R0], #4    
     LDR     R1, =_sys_alarm
     STR     R1, [R0], #4
     LDR     R1, =_sys_signal
     STR     R1, [R0], #4
-    LDR     R1, =_sys_memcpy
-    STR     R1, [R0], #4
-    LDR     R1, =_sys_malloc
+	LDR     R1, =_sys_malloc
     STR     R1, [R0], #4
     LDR     R1, =_sys_free
     STR     R1, [R0], #4
