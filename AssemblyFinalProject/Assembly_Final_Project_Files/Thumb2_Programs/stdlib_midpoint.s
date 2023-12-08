@@ -62,13 +62,27 @@ _strncpy_return
 ;	size	- #bytes to allocate
 ; Return value
 ;   	void*	a pointer to the allocated space
+	IMPORT _kinit
 	EXPORT _malloc
 _malloc
-    PUSH {R4-R11, LR}   
-    MOV R7, #3         
-    SVC #0x0              
-    POP {R4-R11, LR}     
-    MOV PC, LR         
+    PUSH {r4, lr}                 
+
+    LDR r4, =0              
+    LDR r4, [r4]                   
+
+    CMP r4, #0                 
+    BNE call_kalloc             
+
+    MOV r4, #1                   
+    LDR r3, =0               
+    STR r4, [r3]                 
+
+    BL _kinit                   
+
+call_kalloc
+    MOV r0, r0                     
+    SVC #4                 
+    POP {r4, pc}                   
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; void _free( void* addr )
@@ -78,13 +92,10 @@ _malloc
 ;   	none
 		EXPORT _free
 _free
-    PUSH {R4-R7, LR}  
-    MOV R4, R0         
-    LDR R7, =4          
-    MOV R0, R4         
-    SVC #0x0           
-    POP {R4-R7, LR}    
-    MOV PC, LR         
+    PUSH {lr}              
+    MOV r0, r0         
+    SVC #5     
+    POP {pc}      
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; unsigned int _alarm( unsigned int seconds )
@@ -99,7 +110,7 @@ _alarm
     PUSH {R4-R7, LR}       
     MOV R0, R0              
     LDR R7, =1              
-    SVC #0x0               
+    SVC #1
     POP {R4-R7, LR}         
     MOV PC, LR             
 
@@ -121,7 +132,7 @@ _signal
     LDR R7, =2              
     MOV R0, R4             
     MOV R1, R5       
-    SVC #0x0            
+    SVC #2        
     POP {R4-R7, LR}         
     MOV PC, LR             
 

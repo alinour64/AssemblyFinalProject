@@ -266,27 +266,34 @@ UsageFault_Handler\
                 EXPORT  UsageFault_Handler        [WEAK]
                 B       .
                 ENDP
+					
+				ALIGN
+systemCallTableAddr
+				DCD 0x20007B00
+
+					
 SVC_Handler PROC
 				EXPORT SVC_Handler [WEAK]
-				IMPORT _syscall_table_jump
-				
-				; Call system call table jump function
-				LDR R1, =_syscall_table_jump
-				
-				; Save registers
-				PUSH {LR}
-				
-				BLX R1
-				
-				; Retrieve the value of the Program Counter to get the SVC number
-				MRS R1, PSP
-				STR R0,[R1]
-				
-				POP {LR}
+				PUSH {r0-r3, r12, lr}       
 
-				BX LR
+				SUB lr, lr, #2           
+				LDR r0, [lr, #-2]          
+				AND r0, r0, #0xFF         
+
+				LDR r1, =systemCallTableAddr
+				LDR r1, [r1]
+
+
+				LSL r0, r0, #2             
+				ADD r0, r1, r0             
+
+				LDR r0, [r0]              
+
+				BX r0
+
+
+				POP {r0-r3, r12, pc}      
 				ENDP
-
 
 DebugMon_Handler\
                 PROC

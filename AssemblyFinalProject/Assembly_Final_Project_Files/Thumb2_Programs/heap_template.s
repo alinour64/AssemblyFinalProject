@@ -17,198 +17,253 @@ INVALID		EQU		-1			; an invalid id
 	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Memory Control Block Initialization
-        EXPORT _kinit
-_kinit
-        PUSH    {R4-R7, LR}        
-        LDR     R0, =0x20006800    
-        MOV     R1, #0x4000         
-        STRH    R1, [R0]            
-        ADD     R0, R0, #2   
-		
-		EXPORT	_heap_init
-_heap_init
-        PUSH    {R4-R7, LR}            
-        LDR     R0, =MCB_TOP           
-        LDR     R1, =MAX_SIZE           
-        ORR     R1, R1, #1            
-        STRH    R1, [R0]
-
-        ADD     R0, R0, #2           
-        LDR     R2, =MCB_BOT           
-ZeroLoop
-        CMP     R0, R2                  
-        BGE     DoneZeroing           
-        MOV     R1, #0                
-        STRH    R1, [R0]              
-        ADD     R0, R0, #2           
-        B       ZeroLoop             
-
-DoneZeroing
-        POP     {R4-R7, PC}           
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Kernel Memory Allocation
-; void* _k_alloc( int size )
-        EXPORT  _rfree
-_rfree
-        PUSH    {R4-R7, LR}                
-        LDRH    R1, [R0]                   
-        BICS    R1, R1, #1             
-        STRH    R1, [R0]                
-        MOV     R2, R0
-        LDR     R3, =0x20006800      
-		SUBS    R3, R0, R3            
-
-        MOVS    R4, #16                      
-        MUL    R3, R3, R4                
-        TST     R3, R3             
-        BNE     CheckRightBuddy       
-
-        SUBS    R2, R2, R3                 
-        B       CheckBuddy
-
-CheckRightBuddy
-        ADDS    R2, R2, R3             
-
-CheckBuddy
-        LDRH    R4, [R2]
-        ANDS    R5, R4, #1           
-        BNE     AllocationDone      
-
-        ; Merge with buddy
-        ADDS    R3, R3, R3            
-        STRH    R3, [R0]              
-        MOVS    R4, #0                      
-        STRH    R4, [R2]
-
-        BL      _rfree
-
-AllocationDone
-        POP     {R4-R7, PC}           
-
-        END
-			
-		EXPORT	_kalloc
-_kalloc
-        PUSH    {R4-R7, LR}            
-
-        LDR     R1, =MIN_SIZE   
-        CMP     R0, R1       
-        BGE     SizeOK                
-        MOV     R0, R1                      
-
-SizeOK
-        LDR     R1, =MCB_TOP             
-        LDR     R2, =MCB_BOT             
-        BL      _ralloc                  
-
-        POP     {R4-R7, PC}                  
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Kernel Memory De-allocation
-; void free( void *ptr )
-		EXPORT	_kfree
-_kfree
-        PUSH    {R4-R7, LR}              
-
-
-        LDR     R1, =0x20001000           
-        LDR     R2, =0x20004FE0           
-        CMP     R0, R1                     
-        BLT     InvalidAddress           
-        CMP     R0, R2                   
-        BGT     InvalidAddress          
-
-        SUBS    R0, R0, R1        
-        LSRS    R0, R0, #4              
-
-        LDR     R1, =0x20006800            
-        ADDS    R0, R0, R1                 
-
-        BL      _rfree                  
-
-        CMP     R0, #0
-        BEQ     InvalidAddress            
-
-FreeDone
-        POP     {R4-R7, PC}               
-
-InvalidAddress
-        MOV     R0, #0                    
-        POP     {R4-R7, PC}                
-
-		BL 		_rfree
-        END
-
-        
-
-        EXPORT _kinit
-_kinit
-        PUSH    {R4-R7, LR}        
-        LDR     R0, =0x20006800    
-        MOV     R1, #0x4000         
-        STRH    R1, [R0]            
-        ADD     R0, R0, #2           
-
-ZeroLoop
-        CMP     R0, #0x20006BFE     
-        BGE     DoneZeroing           
-        MOV     R1, #0                
-        STRH    R1, [R0]            
-        ADD     R0, R0, #2
-        B       ZeroLoop         
-DoneZeroing
-        POP     {R4-R7, PC}            
-
-        END
-		
-		EXPORT _ralloc
+	EXPORT _ralloc
 _ralloc
-        PUSH    {R4-R11, LR}              
+    PUSH {r4-r7, lr}
 
-        SUBS    R3, R2, R1                
-        ADDS    R3, R3, #2   
-        LSRS    R4, R3, #1   
-        ADDS    R5, R1, R4               
+    MOV r4, r0                
+    MOV r5, r1                 
+    MOV r6, r2                 
+    LDR r7, =MCB_ENT_SZ
+    LDR r7, [r7]
+    SUB r2, r6, r5             
+    ADD r2, r2, r7             
+    LSRS r3, r2, #1           
+    ADD r7, r5, r3
+    MOV r0, #0                
+    LSLS r2, r2, #4           
+    LSLS r3, r3, #4          
 
-        SUBS    R1, R1, #0x20006800       
-        SUBS    R5, R5, #0x20006800      
-        SUBS    R2, R2, #0x20006800      
+    CMP r4, r3
+    BHI _ralloc_occupy
 
-        LDRH    R6, [R0, R1]               
-        AND    R7, R6, #1                
-        BNE     TryRightHalf               
+    SUB r2, r7, #MCB_ENT_SZ
+    MOV r0, r4
+    MOV r1, r5
+    MOV r2, r2
+    BL _ralloc          
+    CMP r0, #0
+    BNE _ralloc_return
 
-        LSLS    R6, R6, #4         
-        LSLS    R4, R4, #4             
+    MOV r0, r4
+    MOV r1, r7
+    MOV r2, r6
+    BL _ralloc               
+    B _ralloc_return
+	LDR r2, =MCB_TOP
 
-        CMP     R0, R4                    
-        BHI     TryRightHalf             
+_ralloc_occupy
+    ADD r1, r5, r2
+    LDR r1, [r1]
+    ANDS r1, r1, #1
+    CMP r1, #0
+    BEQ _ralloc_space_check
+    MOV r0, #0                
+    B _ralloc_return
 
-        ADDS    R2, R1, R4             
-        PUSH    {R0, R1, R2}            
-        BL      _ralloc                  
-        POP     {R0, R1, R2}             
+_ralloc_space_check
+    ADD r1, r5, r2
+    LDRH r1, [r1]
+    CMP r1, r2
+    BLO _ralloc_exit_zero
+    ORRS r1, r2, #1
+    ADD r1, r5, r2
+    STRH r1, [r1]       
 
-        CMP     R0, #0                
-        BNE     AllocationSuccessful     
+    LDR r1, =HEAP_TOP
+    SUB r0, r5, r2
+    LSLS r0, r0, #4
+    ADD r0, r1, r0 
 
-TryRightHalf
-        ADDS    R1, R5, #0                
-        PUSH    {R0, R1, R2}            
-        BL      _ralloc                   
-        POP     {R0, R1, R2}             
-        B       AllocationDone         
+_ralloc_return
+    POP {r4-r7, pc}          
 
-AllocationSuccessful
-        LDRH    R6, [R0, R1]              
-        ORRS    R6, R6, #1            
-        STRH    R6, [R0, R1]           
+_ralloc_exit_zero
+    MOV r0, #0               
+    POP {r4-r7, pc}           
+		
+		
+	EXPORT _rfree
+_rfree
+    PUSH {r4-r7, lr}
 
-AllocationDone
-        MOV     R0, #0                     
-        POP     {R4-R11, PC}              
+    MOV r4, r0
+    LDR r2, =MCB_TOP        
+    ADD r1, r4, r2         
+    LDR r5, [r1]                
 
-        END
-			
-			
- ; 		EXPORT _ksignal
- ;_ksignal
+    SUB r6, r4, r2        
+    LSRS r5, r5, #4
+    LSLS r5, r5, #4
+    STRH r5, [r1]           
+
+    LSRS r7, r6, r5
+    ANDS r7, r7, #1
+    CMP r7, #0
+    BEQ _rfree_left
+    B _rfree_right
+
+
+_rfree_left
+    ADD r7, r4, r5
+    LDR r1, =MCB_BOT        
+    CMP r7, r1
+    BGE _rfree_exit_zero
+    ADD r1, r7, r3
+    LDRH r7, [r1]       
+    ANDS r0, r7, #1
+    CMP r0, #0
+    BNE _rfree_exit            
+    LSRS r7, r7, #5
+    LSLS r7, r7, #5            
+    CMP r7, r5
+    BNE _rfree_exit            
+    MOVS r7, #0
+    ADD r1, r4, r5
+    ADD r1, r1, r3
+    STRH r7, [r1]    
+    LSLS r5, r5, #1            
+    ADD r1, r4, r3
+    STRH r5, [r1]       
+    MOV r0, r4
+    BL _rfree                 
+    B _rfree_exit
+	
+	
+_rfree_right
+    SUB r7, r4, r5
+    CMP r7, r2             
+    BLT _rfree_exit_zero
+    ADD r1, r7, r3
+    LDRH r7, [r1]       
+    ANDS r0, r7, #1
+    CMP r0, #0
+    BNE _rfree_exit           
+    LSRS r7, r7, #5
+    LSLS r7, r7, #5          
+    CMP r7, r5
+    BNE _rfree_exit
+    MOVS r7, #0
+    ADD r1, r4, r3
+    STRH r7, [r1]     
+    LSLS r5, r5, #1            
+    SUB r1, r4, r5
+    ADD r1, r1, r3
+    STRH r5, [r1]      
+    SUB r0, r4, r5
+    BL _rfree                 
+    B _rfree_exit
+
+_rfree_exit_zero
+    MOVS r0, #0
+
+_rfree_exit
+    POP {r4-r7, pc}           
+
+
+	EXPORT _kinit
+_kinit
+    PUSH {r4, r5, lr}       
+
+    LDR r4, =MCB_TOP       
+    LDR r5, =MAX_SIZE       
+    STRH r5, [r4]           
+
+    LDR r4, =MCB_TOP
+    ADD r4, r4, #2          
+
+init_loop
+    LDR r5, =MCB_BOT
+    CMP r4, r5
+    BGE end_init
+    MOVS r5, #0
+    STRH r5, [r4]           
+    ADD r4, r4, #2        
+    B init_loop
+
+end_init
+    POP {r4, r5, pc}
+
+
+	EXPORT _kalloc
+_kalloc
+    PUSH {r4, lr}          
+
+    MOV r4, r0             
+
+    CMP r4, #32              
+    BGE skip_size_adjustment 
+    MOV r4, #32           
+skip_size_adjustment
+    LDR r0, =MCB_TOP
+    LDR r1, =MCB_BOT
+    MOV r0, r4              
+    LDR r1, [r1]      
+    LDR r2, [r0]             
+
+    BL _ralloc            
+
+    POP {r4, pc}             
+	
+	
+	
+	EXPORT _kfree
+_kfree
+    PUSH {r4, r5, lr}         
+
+
+    MOV r4, r0                
+    LDR r5, =HEAP_TOP
+    LDR r5, [r5]               
+    LDR r6, =HEAP_BOT
+    LDR r6, [r6]              
+
+
+    CMP r4, r5
+    BLT invalid_address       
+    CMP r4, r6
+    BGT invalid_address     
+
+    LDR r7, =MCB_TOP
+    LDR r7, [r7]             
+    SUB r4, r4, r5           
+    LSRS r4, r4, #4           
+    ADD r4, r4, r7     
+
+    MOV r0, r4                 
+    BL _rfree                 
+
+
+    CMP r0, #0
+    BEQ invalid_address        
+
+    MOV r0, r4                
+    POP {r4, r5, pc}           
+
+invalid_address
+    MOV r0, #0                 
+    POP {r4, r5, pc}    
+
+
+
+
+	EXPORT _heap_init
+_heap_init
+    PUSH {r4, r5, lr}      
+
+    LDR r4, =MCB_TOP       
+    LDR r5, =MCB_BOT       
+
+init_mcb_loop
+    CMP r4, r5             
+    BGE end_inits           
+    MOVS r0, #0         
+    STRH r0, [r4]           
+    ADD r4, r4, #2         
+    B init_mcb_loop    
+
+end_inits
+    POP {r4, r5, pc}        
+
+
+	END
