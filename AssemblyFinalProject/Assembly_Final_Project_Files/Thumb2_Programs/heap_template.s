@@ -127,9 +127,10 @@ RETURN
 _rfree
 	PUSH{LR}
     LDR R2, = MCB_TOP
+	;mcb_addr
     MOV R1, R0
 	;  short mcb_contents = *(short *)&array[ m2a( mcb_addr ) ];
-	LDR R3, [R1]
+	LDRH R3, [R1]
 	;  int mcb_offset = mcb_addr - mcb_top;
 	SUB R4, R1, R2
 	;  int mcb_chunk = ( mcb_contents /= 16 );
@@ -139,15 +140,15 @@ _rfree
 	LSL R3, R3, #4
 	MOV R6, R3
  
-    STR R3, [R1] 
+    STRH R3, [R1] 
 
 	MOV R7, #0
 division_loop
-    CMP R4, R5      ; Compare dividend (R0) with divisor (R1)
-    BLT end_division; If R0 < R1, division is complete
-    SUB R4, R4, R5  ; Subtract divisor from dividend
-    ADD R7, R7, #1  ; Increment the quotient
-    B division_loop ; Repeat the loop
+    CMP R4, R5 
+    BLT end_division; 
+    SUB R4, R4, R5  
+    ADD R7, R7, #1  
+    B division_loop 
 
 end_division
 	AND R7, R7, #1
@@ -160,7 +161,7 @@ equal
 	CMP R7, R8
 	BGE return_null
 	ADD R7, R1, R5
-	LDR R7, [R7]
+	LDRH R7, [R7]
 	
 	
 	AND R8, R7, #1
@@ -168,9 +169,57 @@ equal
 	
 	LSL R7, R7, #5
 	LSR R7, R7, #5
+	CMP R8, R6
+	;Clear my buddy
+	MOV R8, #0
+	ADD R9, R1, R5
+	STRH R8, [R9]
+	
+	LSL R6, R6, #1;
+	;merge my buddy
+	STRH R6, [R1]
+	
+	
+	
+	MOV R0, R1
+	BL _rfree
+	B RETURN
 	
 	
 skip
+	SUB R7, R1, R5
+	LDR R8, =MCB_TOP
+	CMP R7, R8
+	BLT return_null
+	
+	SUB R7, R1, R5
+	LDRH R7, [R7]
+	AND R8, R7, #1
+	CMP R8, #0
+	BNE DONE
+	LSL R7, R7, #5
+	LSR R7, R7, #5
+	CMP R7, R6
+	BNE DONE
+	;clear myself
+	MOV R7, #0
+	STRH R7, [R1]
+	
+	LSL R6, R6, #1;
+	;merge me to my buddy
+	SUB R8, R1, R5
+	STRH R6, [R8]
+	
+	
+	
+	SUB R8, R1, R5
+	MOV R0, R8
+	BL _rfree
+	B RETURN
+
+DONE
+	MOV R0, R1
+	B RETURN
 
 
 	EXPORT _kinit

@@ -197,28 +197,27 @@ int _rfree( int mcb_addr ) {
       //     ( mcb_addr - mcb_chunk ), mcb_buddy, mcb_buddy );      
       
       if ( ( mcb_buddy & 0x0001 ) == 0 ) {
-	// my buddy is not used
-	// printf( "my buddy is not used\n" );
-	
-	mcb_buddy = ( mcb_buddy / 32 ) * 32; // clear bit 4-0
-	if ( mcb_buddy == my_size ) {
+				// my buddy is not used
+				// printf( "my buddy is not used\n" );
+				
+				mcb_buddy = ( mcb_buddy / 32 ) * 32; // clear bit 4-0
+				if ( mcb_buddy == my_size ) {
 
-	  // printf( "_rfree: mcb_budy == my_size = %d\n", mcb_buddy );
-	  
-	  // my buddy is unused and has the same size.
-	  *(short *)&array[ m2a( mcb_addr ) ] = 0; // clear myself
-	  my_size *= 2;
-	  *(short *)&array[ m2a( mcb_addr - mcb_chunk ) ]
-	    = my_size; // merge me to my buddy
+					// printf( "_rfree: mcb_budy == my_size = %d\n", mcb_buddy );
+					
+					// my buddy is unused and has the same size.
+					*(short *)&array[ m2a( mcb_addr ) ] = 0; // clear myself
+					my_size *= 2;
+					*(short *)&array[ m2a( mcb_addr - mcb_chunk ) ]	= my_size; // merge me to my buddy
 
-	  // printf( "_rfree: myself cleared = %d, my buddy = %d\n",
-	  //	  *(short *)&array[ m2a( mcb_addr ) ],
-	  //	  *(short *)&array[ m2a( mcb_addr - mcb_chunk ) ] );
-	  // printf( "_rfree: promoto my buddy\n" );
+					// printf( "_rfree: myself cleared = %d, my buddy = %d\n",
+					//	  *(short *)&array[ m2a( mcb_addr ) ],
+					//	  *(short *)&array[ m2a( mcb_addr - mcb_chunk ) ] );
+					// printf( "_rfree: promoto my buddy\n" );
 
-	  // promote my buddy
-	  return _rfree( mcb_addr - mcb_chunk );
-	}
+					// promote my buddy
+					return _rfree( mcb_addr - mcb_chunk );
+				}
       }
     }
   }
