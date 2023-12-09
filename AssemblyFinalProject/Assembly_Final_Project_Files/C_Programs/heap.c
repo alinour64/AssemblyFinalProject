@@ -77,9 +77,11 @@ void *_ralloc( int size, int left, int right ) {
   int act_entire_size = entire * 16;
   int act_half_size = half * 16;
 
+	;r0 -r8 
+	
   // printf( "entire=%d, half=%d, mid=%x, heap=%x, act_entire=%d, act_half=%d\n",
   //	  entire, half, midpoint, heap_addr, act_entire_size, act_half_size );
-
+ 
   if ( size <= act_half_size ) {
     // _ralloc_left
     // printf( "_ralloc_left\n" );
@@ -88,12 +90,14 @@ void *_ralloc( int size, int left, int right ) {
       // __alloc_right
       // printf( "_ralloc_right\n" );
       return _ralloc( size, midpoint, right );
+			 
     }
     // make sure to split the parent MCB
     if ( ( array[ m2a( midpoint ) ] & 0x01 ) == 0 )
       *(short *)&array[ m2a( midpoint ) ] = act_half_size;
     return heap_addr;
   }
+// HERE
   else {
     // needs to occupy this chunk
     if ( ( array[ m2a( left ) ] & 0x01 ) != 0 ) {

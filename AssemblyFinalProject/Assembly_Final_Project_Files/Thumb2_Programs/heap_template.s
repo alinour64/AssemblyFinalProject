@@ -19,70 +19,110 @@ INVALID		EQU		-1			; an invalid id
 ; Memory Control Block Initialization
 	EXPORT _ralloc
 _ralloc
-    PUSH {r4-r7, lr}
+    PUSH {lr}
+	
+	;R3 = Int Entire
+	SUB R9, R2, R1
+	LDR R10, =MCB_ENT_SZ
+	ADD R3, R9, R10
+	;R4 = half
+	ASR R4, R3, #1
+	;R5 = midpoint
+	ADD R5, R1, R4
+	;R6 = heap_addr
+	MOV R6, #0
+	;R7 = act_entire_size
+	LSL R7, R3, #4
+	;R8 = act_half_size
+	LSL R8, R4, #4
 
-    MOV r4, r0                
-    MOV r5, r1                 
-    MOV r6, r2                 
-    LDR r7, =MCB_ENT_SZ
-    LDR r7, [r7]
-    SUB r2, r6, r5             
-    ADD r2, r2, r7             
-    LSRS r3, r2, #1           
-    ADD r7, r5, r3
-    MOV r0, #0                
-    LSLS r2, r2, #4           
-    LSLS r3, r3, #4          
+	;;;;;
+	
+	
 
-    CMP r4, r3
-    BHI _ralloc_occupy
+    CMP r0, r8
+    BGT _ralloc_occupy
+	
+	
+	; ----------------
+	PUSH {r0-r5, r7-r12}  	; snapshot 
+	; change my para
+	LDR R9, =MCB_ENT_SZ
+	SUB R2, R5, R9  
+    BL _ralloc         		; go to recursion
+	POP {r0-r5, r7-r12}   	; bring back based on snapshot
+	;--------------------
+	CMP R6, #0
+	BEQ true
+	
+	; b
+	LDR R11, [R5]
+	
+	;a - R10
+	AND R10, R11, #1
+	
+	CMP R10, #0
+	BEQ next
+	
+	B RETURN
+	
+next
+	STR R8, [R5]
+	B RETURN
+	
+true
+	PUSH {r0-r5, r7-r12}  	; snapshot  
+	MOV R1, R5
+    BL _ralloc         		; go to recursion
+	POP {r0-r5, r7-r12}
+	
+	B RETURN
+	
+_ralloc_occupy ;; DONE ELSE OF 1ST IF
+	
+	;b - R9
+	LDR R9, [R1]
+	
+	;a - R10
+	;AND R10, b, #0X01
+	AND R10, R9, #0X01
+	
+	;CMP a,#0 BECAUSE IF STATEMENT
+	CMP R10,#0
+	BNE RETURN_NULL
+	
+	;a - R10
+	LDR R10, [R1]
+	
+	;CMP a, R7
+	CMP R10, R7
+	BLT RETURN_NULL
+	
+	;b - R10
+	ORR R10, R7, #0x01
+	
+	;STR b, [R1]
+	STR R10, [R1]
+	
+	LDR R10, = MCB_TOP
+	LDR R11, = HEAP_TOP
+	; R6s
+	SUB R6, R1, R10
+	LSL R6, R6, #4
+	ADD R6, R6, R11
+	
+	; RETURN VAL TO SAVE TO R6
+	B	RETURN
+	
+RETURN_NULL
+	MOV R6, #0
+	B RETURN
+	
+RETURN 
+	POP {LR}
+	BX LR
 
-    SUB r2, r7, #MCB_ENT_SZ
-    MOV r0, r4
-    MOV r1, r5
-    MOV r2, r2
-    BL _ralloc          
-    CMP r0, #0
-    BNE _ralloc_return
 
-    MOV r0, r4
-    MOV r1, r7
-    MOV r2, r6
-    BL _ralloc               
-    B _ralloc_return
-	LDR r2, =MCB_TOP
-
-_ralloc_occupy
-    ADD r1, r5, r2
-    LDR r1, [r1]
-    ANDS r1, r1, #1
-    CMP r1, #0
-    BEQ _ralloc_space_check
-    MOV r0, #0                
-    B _ralloc_return
-
-_ralloc_space_check
-    ADD r1, r5, r2
-    LDRH r1, [r1]
-    CMP r1, r2
-    BLO _ralloc_exit_zero
-    ORRS r1, r2, #1
-    ADD r1, r5, r2
-    STRH r1, [r1]       
-
-    LDR r1, =HEAP_TOP
-    SUB r0, r5, r2
-    LSLS r0, r0, #4
-    ADD r0, r1, r0 
-
-_ralloc_return
-    POP {r4-r7, pc}          
-
-_ralloc_exit_zero
-    MOV r0, #0               
-    POP {r4-r7, pc}           
-		
-		
 	EXPORT _rfree
 _rfree
     PUSH {r4-r7, lr}
@@ -167,18 +207,18 @@ _kinit
 
     LDR r4, =MCB_TOP       
     LDR r5, =MAX_SIZE       
-    STRH r5, [r4]           
+    STR r5, [r4]           
 
     LDR r4, =MCB_TOP
-    ADD r4, r4, #2          
+    ADD r4, r4, #4          
 
 init_loop
     LDR r5, =MCB_BOT
     CMP r4, r5
     BGE end_init
-    MOVS r5, #0
-    STRH r5, [r4]           
-    ADD r4, r4, #2        
+    MOVS r6, #0x0
+    STR r6, [r4]           
+    ADD r4, r4, #4        
     B init_loop
 
 end_init
@@ -187,24 +227,28 @@ end_init
 
 	EXPORT _kalloc
 _kalloc
-    PUSH {r4, lr}          
+    PUSH {lr}          
 
     MOV r4, r0             
 
     CMP r4, #32              
     BGE skip_size_adjustment 
-    MOV r4, #32           
-skip_size_adjustment
-    LDR r0, =MCB_TOP
-    LDR r1, =MCB_BOT
-    MOV r0, r4              
-    LDR r1, [r1]      
-    LDR r2, [r0]             
-
-    BL _ralloc            
-
-    POP {r4, pc}             
+    MOV r4, #32        
 	
+skip_size_adjustment
+
+    LDR r1, =MCB_TOP
+    LDR r2, =MCB_BOT
+              
+	; ----------------
+	PUSH {r0-r5, r7-r12}  	; snapshot 
+							; change my para
+    BL _ralloc         		; go to recursion
+	POP {r0-r5, r7-r12}   	; bring back based on snapshot
+	;--------------------
+	
+    POP {lr}             
+	BX lr
 	
 	
 	EXPORT _kfree
@@ -251,8 +295,8 @@ invalid_address
 _heap_init
     PUSH {r4, r5, lr}      
 
-    LDR r4, =MCB_TOP       
-    LDR r5, =MCB_BOT       
+    LDR r4, =HEAP_TOP       
+    LDR r5, =HEAP_BOT       
 
 init_mcb_loop
     CMP r4, r5             

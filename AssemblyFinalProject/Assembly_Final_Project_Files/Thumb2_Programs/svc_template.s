@@ -61,11 +61,17 @@ _sys_free
 
 		EXPORT	_syscall_table_jump
 _syscall_table_jump
-    LDR r1, =SYSTEMCALLTBL   
-    LSL r0, r0, #2      
-    ADD r0, r1, r0           
-    LDR r0, [r0]             
-    BX r0                     
+		LDR        r11, = SYSTEMCALLTBL    ; load the starting address of SYSTEMCALLTBL
+        MOV        r10, r7            ; copy the system call number into r10
+        LSL        r10, #0x2        ; system call number * 4, so that for malloc, it is 4, for free, it is 8
+        ;;-------------------------------------------------
+
+        ADD R10, R10, R11
+        LDR R1, [R10]
+        BLX R1
+
+        ;--------------------------------------------------
+        BX        lr                ; return to SVC_Handler                 
 
 
     EXPORT	_syscall_table_init
@@ -76,8 +82,6 @@ _syscall_table_init
     LDR r1, =_sys_alarm
     STR r1, [r0], #4
     LDR r1, =_sys_signal
-    STR r1, [r0], #4
-    LDR r1, =_sys_memcpy
     STR r1, [r0], #4
     LDR r1, =_sys_malloc
     STR r1, [r0], #4

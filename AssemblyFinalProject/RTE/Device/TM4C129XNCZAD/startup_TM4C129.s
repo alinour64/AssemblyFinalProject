@@ -273,27 +273,30 @@ systemCallTableAddr
 
 					
 SVC_Handler PROC
-				EXPORT SVC_Handler [WEAK]
-				PUSH {r0-r3, r12, lr}       
+                EXPORT SVC_Handler [WEAK]
 
-				SUB lr, lr, #2           
-				LDR r0, [lr, #-2]          
-				AND r0, r0, #0xFF         
+                IMPORT _syscall_table_jump
 
-				LDR r1, =systemCallTableAddr
-				LDR r1, [r1]
+                ; Call system call table jump function
+                LDR R1, =_syscall_table_jump
 
+                PUSH {LR}
+				
+				BLX R1
 
-				LSL r0, r0, #2             
-				ADD r0, r1, r0             
+                ; Retrieve the value of the Program Counter to get the SVC number
+                MRS R0, PSP
+                LDR R1, [R0, #24]
+                SUB R1, R1, #2
+                LDRB R1, [R1]
 
-				LDR r0, [r0]              
+                MRS R1, PSP
+                STR R0,[R1]
 
-				BX r0
+                POP {LR}
 
-
-				POP {r0-r3, r12, pc}      
-				ENDP
+                BX LR
+                ENDP
 
 DebugMon_Handler\
                 PROC
