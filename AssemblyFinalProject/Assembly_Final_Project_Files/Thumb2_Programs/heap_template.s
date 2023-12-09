@@ -162,6 +162,14 @@ equal
 	ADD R7, R1, R5
 	LDR R7, [R7]
 	
+	
+	AND R8, R7, #1
+	CMP R8, #0
+	
+	LSL R7, R7, #5
+	LSR R7, R7, #5
+	
+	
 skip
 
 
