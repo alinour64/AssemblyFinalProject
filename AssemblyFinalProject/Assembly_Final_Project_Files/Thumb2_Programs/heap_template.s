@@ -89,14 +89,14 @@ _ralloc_occupy ;; DONE ELSE OF 1ST IF
 	
 	;CMP a,#0 BECAUSE IF STATEMENT
 	CMP R10,#0
-	BNE RETURN_NULL
+	BNE RETURN_NULLs
 	
 	;a - R10
 	LDR R10, [R1]
 	
 	;CMP a, R7
 	CMP R10, R7
-	BLT RETURN_NULL
+	BLT RETURN_NULLs
 	
 	;b - R10
 	ORR R10, R7, #0x01
@@ -114,7 +114,7 @@ _ralloc_occupy ;; DONE ELSE OF 1ST IF
 	; RETURN VAL TO SAVE TO R6
 	B	RETURN
 	
-RETURN_NULL
+RETURN_NULLs
 	MOV R6, #0
 	B RETURN
 	
@@ -142,15 +142,7 @@ _rfree
  
     STRH R3, [R1] 
 
-	MOV R7, #0
-division_loop
-    CMP R4, R5 
-    BLT end_division; 
-    SUB R4, R4, R5  
-    ADD R7, R7, #1  
-    B division_loop 
-
-end_division
+	SDIV R7, R4, R5
 	AND R7, R7, #1
 	CMP R7, #0
 	BEQ equal
@@ -308,9 +300,9 @@ addr_is_valid
 	CMP R0, #0
 	BEQ return_null
 	POP{R0}
-	
+	MOV R0, R1
 	B RETURN
-	;return ptr
+
 
 
 
