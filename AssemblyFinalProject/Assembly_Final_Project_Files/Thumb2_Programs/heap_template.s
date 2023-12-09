@@ -46,7 +46,7 @@ _ralloc
 	
 	; ----------------
 	PUSH {r0-r5, r7-r12}  	; snapshot 
-	; change my para
+	; change my parakf
 	LDR R9, =MCB_ENT_SZ
 	SUB R2, R5, R9  
     BL _ralloc         		; go to recursion
@@ -125,80 +125,44 @@ RETURN
 
 	EXPORT _rfree
 _rfree
-    PUSH {r4-r7, lr}
+	PUSH{LR}
+    LDR R2, = MCB_TOP
+    MOV R1, R0
+	;  short mcb_contents = *(short *)&array[ m2a( mcb_addr ) ];
+	LDR R3, [R1]
+	;  int mcb_offset = mcb_addr - mcb_top;
+	SUB R4, R1, R2
+	;  int mcb_chunk = ( mcb_contents /= 16 );
+	LSR R3, R3, #4
+	MOV R5, R3
+	;  int my_size = ( mcb_contents *= 16 ); // clear the used bit
+	LSL R3, R3, #4
+	MOV R6, R3
+ 
+    STR R3, [R1] 
 
-    MOV r4, r0
-    LDR r2, =MCB_TOP        
-    ADD r1, r4, r2         
-    LDR r5, [r1]                
+	MOV R7, #0
+division_loop
+    CMP R4, R5      ; Compare dividend (R0) with divisor (R1)
+    BLT end_division; If R0 < R1, division is complete
+    SUB R4, R4, R5  ; Subtract divisor from dividend
+    ADD R7, R7, #1  ; Increment the quotient
+    B division_loop ; Repeat the loop
 
-    SUB r6, r4, r2        
-    LSRS r5, r5, #4
-    LSLS r5, r5, #4
-    STRH r5, [r1]           
-
-    LSRS r7, r6, r5
-    ANDS r7, r7, #1
-    CMP r7, #0
-    BEQ _rfree_left
-    B _rfree_right
-
-
-_rfree_left
-    ADD r7, r4, r5
-    LDR r1, =MCB_BOT        
-    CMP r7, r1
-    BGE _rfree_exit_zero
-    ADD r1, r7, r3
-    LDRH r7, [r1]       
-    ANDS r0, r7, #1
-    CMP r0, #0
-    BNE _rfree_exit            
-    LSRS r7, r7, #5
-    LSLS r7, r7, #5            
-    CMP r7, r5
-    BNE _rfree_exit            
-    MOVS r7, #0
-    ADD r1, r4, r5
-    ADD r1, r1, r3
-    STRH r7, [r1]    
-    LSLS r5, r5, #1            
-    ADD r1, r4, r3
-    STRH r5, [r1]       
-    MOV r0, r4
-    BL _rfree                 
-    B _rfree_exit
+end_division
+	AND R7, R7, #1
+	CMP R7, #0
+	BEQ equal
+	B skip
+equal 
+	ADD R7, R1, R5
+	LDR R8, =MCB_BOT
+	CMP R7, R8
+	BGE return_null
+	ADD R7, R1, R5
+	LDR R7, [R7]
 	
-	
-_rfree_right
-    SUB r7, r4, r5
-    CMP r7, r2             
-    BLT _rfree_exit_zero
-    ADD r1, r7, r3
-    LDRH r7, [r1]       
-    ANDS r0, r7, #1
-    CMP r0, #0
-    BNE _rfree_exit           
-    LSRS r7, r7, #5
-    LSLS r7, r7, #5          
-    CMP r7, r5
-    BNE _rfree_exit
-    MOVS r7, #0
-    ADD r1, r4, r3
-    STRH r7, [r1]     
-    LSLS r5, r5, #1            
-    SUB r1, r4, r5
-    ADD r1, r1, r3
-    STRH r5, [r1]      
-    SUB r0, r4, r5
-    BL _rfree                 
-    B _rfree_exit
-
-_rfree_exit_zero
-    MOVS r0, #0
-
-_rfree_exit
-    POP {r4-r7, pc}           
+skip
 
 
 	EXPORT _kinit
@@ -253,40 +217,43 @@ skip_size_adjustment
 	
 	EXPORT _kfree
 _kfree
-    PUSH {r4, r5, lr}         
+	push{lr}
+	;addr = ptr
+    MOV R1, R0
+	;R2 = heap_top
+	LDR R2, =HEAP_TOP
+	;R3 = heapbout
+	LDR R3,	=HEAP_BOT
+	
+	CMP     r1, r2      
+    BLT     return_null
 
+check_heap_bot
+    CMP     r1, r3     
+    BGT     return_null
+    B       addr_is_valid   
+	
+return_null
+	MOV R0, #0
+	B RETURN
 
-    MOV r4, r0                
-    LDR r5, =HEAP_TOP
-    LDR r5, [r5]               
-    LDR r6, =HEAP_BOT
-    LDR r6, [r6]              
+addr_is_valid
 
-
-    CMP r4, r5
-    BLT invalid_address       
-    CMP r4, r6
-    BGT invalid_address     
-
-    LDR r7, =MCB_TOP
-    LDR r7, [r7]             
-    SUB r4, r4, r5           
-    LSRS r4, r4, #4           
-    ADD r4, r4, r7     
-
-    MOV r0, r4                 
-    BL _rfree                 
-
-
-    CMP r0, #0
-    BEQ invalid_address        
-
-    MOV r0, r4                
-    POP {r4, r5, pc}           
-
-invalid_address
-    MOV r0, #0                 
-    POP {r4, r5, pc}    
+	LDR R5, =MCB_TOP
+	SUB R4, R1, R2
+	LSR R4, R4, #4
+	ADD R4, R4, R5
+	
+	
+	PUSH{R0} 
+	MOV R0, R4
+	BL	_rfree
+	CMP R0, #0
+	BEQ return_null
+	POP{R0}
+	
+	B RETURN
+	;return ptr
 
 
 
