@@ -23,7 +23,7 @@ _sys_exit
 _sys_alarm
     PUSH    {LR}
     BL      _alarm
-    POP     {PC}
+    POP     {LR}
 	BX LR
 	
 	IMPORT _signal
@@ -31,7 +31,7 @@ _sys_signal
     LDR R11, = _signal
     PUSH    {LR}
     BLX      R11
-    POP     {PC}
+    POP     {LR}
 	BX LR
 
 	
@@ -40,7 +40,7 @@ _sys_memcpy
 	LDR R11, = _strncpy
     PUSH    {LR}
     BLX     R11
-    POP     {PC}
+    POP     {LR}
 	BX LR
 	
 	IMPORT _kalloc
@@ -48,7 +48,7 @@ _sys_malloc
 	LDR R11, = _kalloc
     PUSH    {LR}
     BLX     R11
-    POP     {PC}
+    POP     {LR}
 	BX LR
 	
 	IMPORT _kfree
@@ -56,7 +56,7 @@ _sys_free
     LDR R11, = _kfree
     PUSH    {LR}
     BLX     R11
-    POP     {PC}
+    POP     {LR}
 	BX LR
 
 		EXPORT	_syscall_table_jump

@@ -283,7 +283,7 @@ SVC_Handler PROC
                 PUSH {LR}
 				
 				BLX R1
-
+				POP {LR}
                 ; Retrieve the value of the Program Counter to get the SVC number
                 MRS R0, PSP
                 LDR R1, [R0, #24]
@@ -293,7 +293,7 @@ SVC_Handler PROC
                 MRS R1, PSP
                 STR R0,[R1]
 
-                POP {LR}
+                
 
                 BX LR
                 ENDP
