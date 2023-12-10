@@ -16,22 +16,22 @@ SYS_FREE		EQU		0x5		; address 20007B14
 _sys_exit
 	PUSH    {LR}
     BLX 	r11
-	POP    {LR}
+	POP    {PC}
 	BX LR
 	
-	IMPORT _alarm
+	IMPORT _timer_init
 _sys_alarm
     PUSH    {LR}
-    BL      _alarm
-    POP     {LR}
+    BL      _timer_init
+    POP     {PC}
 	BX LR
 	
-	IMPORT _signal
+	IMPORT _signal_handler
 _sys_signal
-    LDR R11, = _signal
+	LDR R11, = _signal_handler
     PUSH    {LR}
     BLX      R11
-    POP     {LR}
+    POP     {PC}
 	BX LR
 
 	
@@ -40,7 +40,7 @@ _sys_memcpy
 	LDR R11, = _strncpy
     PUSH    {LR}
     BLX     R11
-    POP     {LR}
+    POP     {PC}
 	BX LR
 	
 	IMPORT _kalloc
@@ -48,7 +48,7 @@ _sys_malloc
 	LDR R11, = _kalloc
     PUSH    {LR}
     BLX     R11
-    POP     {LR}
+    POP     {PC}
 	BX LR
 	
 	IMPORT _kfree
@@ -56,7 +56,7 @@ _sys_free
     LDR R11, = _kfree
     PUSH    {LR}
     BLX     R11
-    POP     {LR}
+    POP     {PC}
 	BX LR
 
 		EXPORT	_syscall_table_jump
@@ -87,4 +87,6 @@ _syscall_table_init
     STR r1, [r0], #4
     LDR r1, =_sys_free
     STR r1, [r0], #4
-    BX lr   
+    BX lr 
+
+	END

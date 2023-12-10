@@ -122,7 +122,6 @@ _signal
                 
     MOV R7,#2        
     SVC #0x0
-	
     POP {R4-R7, LR}         
     MOV PC, LR            
 

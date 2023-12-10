@@ -79,7 +79,7 @@ _timer_update PROC
 
 _update_done
         MOV pc, lr
-ENDP
+		ENDP
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Timer update
