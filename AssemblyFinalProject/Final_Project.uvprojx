@@ -454,29 +454,29 @@
           </GroupOption>
           <Files>
             <File>
-              <FileName>svc_template.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\Assembly_Final_Project_Files\Thumb2_Programs\svc_template.s</FilePath>
-            </File>
-            <File>
-              <FileName>heap_template.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\Assembly_Final_Project_Files\Thumb2_Programs\heap_template.s</FilePath>
-            </File>
-            <File>
-              <FileName>stdlib_midpoint.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\Assembly_Final_Project_Files\Thumb2_Programs\stdlib_midpoint.s</FilePath>
-            </File>
-            <File>
-              <FileName>timer_template.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\Assembly_Final_Project_Files\Thumb2_Programs\timer_template.s</FilePath>
-            </File>
-            <File>
               <FileName>driver_keil.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Assembly_Final_Project_Files\C_Programs\driver_keil.c</FilePath>
+            </File>
+            <File>
+              <FileName>heap.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Assembly_Final_Project_Files\Thumb2_Programs\heap.s</FilePath>
+            </File>
+            <File>
+              <FileName>stdlib.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Assembly_Final_Project_Files\Thumb2_Programs\stdlib.s</FilePath>
+            </File>
+            <File>
+              <FileName>svc.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Assembly_Final_Project_Files\Thumb2_Programs\svc.s</FilePath>
+            </File>
+            <File>
+              <FileName>timer.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Assembly_Final_Project_Files\Thumb2_Programs\timer.s</FilePath>
             </File>
           </Files>
         </Group>
