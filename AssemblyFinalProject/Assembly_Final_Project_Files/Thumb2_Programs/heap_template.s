@@ -125,7 +125,7 @@ RETURN
 
 	EXPORT _rfree
 _rfree
-	PUSH{LR}
+	PUSH{R1-R9, LR}
     LDR R2, = MCB_TOP
 	;mcb_addr
     MOV R1, R0
@@ -175,7 +175,11 @@ equal
 	
 	MOV R0, R1
 	BL _rfree
-	B RETURN
+
+RFREE_RETURN
+	POP{R1-R9, LR}
+	BX LR
+
 	
 	
 skip
@@ -266,7 +270,7 @@ skip_size_adjustment
 	
 	EXPORT _kfree
 _kfree
-	push{lr}
+	PUSH {R1-R5, LR}
 	;addr = ptr
     MOV R1, R0
 	;R2 = heap_top
@@ -284,7 +288,7 @@ check_heap_bot
 	
 return_null
 	MOV R0, #0
-	B RETURN
+	B KFREE_RETURN
 
 addr_is_valid
 
@@ -301,9 +305,10 @@ addr_is_valid
 	BEQ return_null
 	POP{R0}
 	MOV R0, R1
-	B RETURN
 
-
+KFREE_RETURN
+	POP {R1-R5, LR}
+    BX LR  
 
 
 
