@@ -221,7 +221,6 @@ DONE
 	EXPORT _kinit
 _kinit
     PUSH {r4, r5, lr}       
-
     LDR r4, =MCB_TOP       
     LDR r5, =MAX_SIZE       
     STR r5, [r4]           
@@ -272,10 +271,12 @@ skip_size_adjustment
 _kfree
 	PUSH {R1-R5, LR}
 	;addr = ptr
-    MOV R1, R0
+	LDR R1, [R0]
+	MOV R2, #0
+    STR r2, [r1]
 	;R2 = heap_top
 	LDR R2, =HEAP_TOP
-	;R3 = heapbout
+	;R3 = heap_bot
 	LDR R3,	=HEAP_BOT
 	
 	CMP     r1, r2      
@@ -284,11 +285,8 @@ _kfree
 check_heap_bot
     CMP     r1, r3     
     BGT     return_null
-    B       addr_is_valid   
-	
-return_null
-	MOV R0, #0
-	B KFREE_RETURN
+
+
 
 addr_is_valid
 
@@ -297,14 +295,19 @@ addr_is_valid
 	LSR R4, R4, #4
 	ADD R4, R4, R5
 	
-	
-	PUSH{R0} 
+
+	PUSH{R0}
 	MOV R0, R4
 	BL	_rfree
 	CMP R0, #0
 	BEQ return_null
 	POP{R0}
 	MOV R0, R1
+	POP {R1-R5, LR};;;;;;;;;;;;;;;;;;;;;;
+    BX LR ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+return_null
+	MOV R0, #0
 
 KFREE_RETURN
 	POP {R1-R5, LR}

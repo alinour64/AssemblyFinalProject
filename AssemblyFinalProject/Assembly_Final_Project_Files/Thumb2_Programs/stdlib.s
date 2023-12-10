@@ -24,7 +24,7 @@ _bzero_loop							; while( ) {
 _bzero_return
 		MOV		r0, r3				; return dest;
 		LDMFD	sp!, {r1-r12,lr}
-		MOV		pc, lr	
+		MOV PC, LR
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; char* _strncpy( char* dest, char* src, int size )
@@ -54,7 +54,7 @@ _strncpy_loop						; while( ) {
 _strncpy_return
 		MOV		r0, r3				; return dest;
 		LDMFD	sp!, {r1-r12,lr}
-		MOV		pc, lr
+		MOV PC, LR  
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; void* _malloc( int size )
@@ -71,7 +71,8 @@ _malloc
     SVC #0x0
 	
     POP {R4-R7, LR}         
-    MOV PC, LR                      
+
+    MOV PC, LR                
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; void _free( void* addr )
@@ -86,8 +87,8 @@ _free
     MOV R7,#4             
     SVC #0x0
 	
-    POP {R4-R7, LR}         
-    MOV PC, LR   
+    POP {R4-R7, LR}       
+    MOV PC, LR  
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; unsigned int _alarm( unsigned int seconds )
 ; Parameters
@@ -104,7 +105,7 @@ _alarm
     SVC #0x0
 	
     POP {R4-R7, LR}         
-    MOV PC, LR             
+    MOV PC, LR        
 
 
 			

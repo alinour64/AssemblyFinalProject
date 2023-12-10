@@ -277,23 +277,24 @@ SVC_Handler PROC
 
                 IMPORT _syscall_table_jump
 
+				PUSH {LR}
                 ; Call system call table jump function
                 LDR R1, =_syscall_table_jump
 
-                PUSH {LR}
+                
 				
 				BLX R1
-
-                ; Retrieve the value of the Program Counter to get the SVC number
+                POP {LR}
+                ;Retrieve the value of the Program Counter to get the SVC number
                 MRS R0, PSP
                 LDR R1, [R0, #24]
                 SUB R1, R1, #2
                 LDRB R1, [R1]
+				
 
                 MRS R1, PSP
                 STR R0,[R1]
 
-                POP {LR}
 
                 BX LR
                 ENDP

@@ -22,15 +22,20 @@ USR_HANDLER     EQU		0x20007B84		; Address of a user-given signal handler functi
 ; void timer_init( )
 		EXPORT		_timer_init
 _timer_init
+		; Stop SysTick
         LDR R0, =STCTRL
         LDR R1, =STCTRL_STOP
         STR R1, [R0]
-
+		; Load maximum value into SysTick Reload Value Register
         LDR R0, =STRELOAD
         LDR R1, =STRELOAD_MX
         STR R1, [R0]
+		;clear the current value register
+		LDR     R0, =STRELOAD   
+		LDR     R1, =STRELOAD_MX   
+		STR     R1, [R0]  
 
-        MOV     pc, lr
+        BX LR
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Timer start
