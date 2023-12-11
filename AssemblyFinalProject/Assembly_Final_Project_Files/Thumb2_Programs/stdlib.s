@@ -126,7 +126,87 @@ _signal
     POP {R1-R12, LR}    
     BX LR       
 
-	
 
+ EXPORT _strlen
+_strlen
+	MOV r1, #0 
+_strlen_loop
+	LDRB r2, [r0, r1]
+	CMP r2, #0 
+	BEQ _strlen_return 
+	ADD r1, r1, #1 
+	B _strlen_loop
+_strlen_return
+	MOV r0, r1 
+	MOV PC, LR
+
+
+
+    EXPORT _memsets
+_memsets
+    STMFD sp!, {r4, lr}       ; Save registers r4 and lr
+    MOV   r3, r0              ; r3 = dest (preserve original dest pointer for return)
+    MOV   r4, r2              ; r4 = n (count)
+    AND   r1, r1, #0xFF       ; Ensure r1 (value to set) is a byte
+_memsets_loop
+    CMP   r4, #0              ; Compare count with 0
+    BEQ   _memsets_return      ; If count is 0, exit loop
+    SUBS  r4, r4, #1          ; Decrement count
+    STRB  r1, [r0], #1        ; Set byte at dest to value in r1 and increment dest
+    BNE   _memsets_loop        ; Repeat loop if count is not zero
+_memsets_return
+    MOV   r0, r3              ; Set return value to original dest pointer
+    LDMFD sp!, {r4, lr}       ; Restore registers r4 and lr
+    MOV   PC, LR              ; Return from function
+           
+
+
+
+
+
+	EXPORT _toupper
+_toupper
+	CMP r0, #'a' 
+	BLT _toupper_return 
+	CMP r0, #'z' 
+	BGT _toupper_return 
+	SUB r0, r0, #32 
+_toupper_return
+	MOV PC, LR
+	
+	
+	EXPORT _strcmp
+_strcmp
+	PUSH  {lr}
+_strcmp_loop
+	LDRB  r2, [r0], #1
+	LDRB  r3, [r1], #1
+	CMP   r2, r3         
+	BNE   _strcmp_done  
+	CMP   r2, #0        
+	BNE   _strcmp_loop
+	MOV   r0, #0       
+	POP   {pc}
+_strcmp_done
+	SUBS  r0, r2, r3   
+	POP   {pc}
+	
+	EXPORT _strcat
+_strcat
+	STMFD sp!, {r4, lr}
+	MOV r3, r0 
+_strcat_find_end
+	LDRB r2, [r3], #1 
+	CMP r2, #0 
+	BNE _strcat_find_end
+	SUB r3, r3, #1 
+_strcat_append
+	LDRB r2, [r1], #1
+	STRB r2, [r3], #1 
+	CMP r2, #0 
+	BNE _strcat_append 
+	MOV r0, r0 
+	LDMFD sp!, {r4, lr} 
+	MOV PC, LR
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 		END			

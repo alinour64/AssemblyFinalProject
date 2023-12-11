@@ -6,6 +6,12 @@ extern void* _memcpy( );
 extern void* _signal( int signum, void (*fn)(int) );
 extern unsigned int _alarm( unsigned int );
 
+extern int _strlen(const char*);
+extern void* _memsets(void*, int, int);
+extern int _toupper(int);
+extern int _strcmp(const char*, const char*);
+extern char* _strcat(char*, const char*);
+
 #define SIG_ALRM 14
 
 int* alarmed;
@@ -56,5 +62,31 @@ int main( ) {
 		void* mem9 = _malloc( 4 );	
 		_free( mem9 );
 	}
+	
+	
+	//strlen
+	char testStr[] = "Nour, Ibrahim!";
+	int len = _strlen(testStr);
+	
+	//memset
+	char buffer[11];
+	_memsets(buffer, 'A', 10);
+	buffer[10] = '\0'; 
+	
+	//toupper
+	char ch = 'a';
+	int upperCh = _toupper(ch);
+	
+	//strcmp
+	const char* str1 = "Ibrahim";
+	const char* str2 = "Nour";
+	int cmpResult = _strcmp(str1, str2);
+
+	//strcat
+	char dest[50] = "Nour, ";
+	const char* src = "Ibrahim!";
+	_strcat(dest, src);
+	
+	
 	return 0;
 }

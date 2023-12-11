@@ -107,8 +107,8 @@ void *_ralloc( int size, int left, int right ) {
     else {
       // yes, we have an entire space
       if ( *(short *)&array[ m2a( left ) ] < act_entire_size )
-	// can't fit
-	return NULL;
+					// can't fit
+					return NULL;
       *(short *)&array[ m2a( left ) ] = act_entire_size | 0x01;
 
       // compute the corresponding heap address
