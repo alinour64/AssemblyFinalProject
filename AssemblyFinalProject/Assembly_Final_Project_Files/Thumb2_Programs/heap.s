@@ -82,7 +82,7 @@ _ralloc_occupy ;; DONE ELSE OF 1ST IF
 	
 	;a - R10
 	;AND R10, b, #0X01
-	AND R10, R9, #0x01
+	AND R10, R9, #0X01
 	
 	;CMP a,#0 BECAUSE IF STATEMENT
 	CMP R10,#0
@@ -116,7 +116,6 @@ RETURN_NULLs
 	B RETURN
 	
 RETURN 
-	MOV R0, R6
 	POP {LR}
 	BX LR
 
@@ -245,27 +244,30 @@ init_loop
     B init_loop
 
 end_init
-    POP {r4, r5, LR}
+    POP {r4, r5, pc}
 
 
 	EXPORT _kalloc
 _kalloc
     PUSH {lr}          
+            
+
     CMP r0, #32
     BGE skip_size_adjustment 
     MOV r0, #32
 	
 skip_size_adjustment
-	
+
     LDR r1, =MCB_TOP
     LDR r2, =MCB_BOT
               
 	; ----------------
 	PUSH {LR}  	; snapshot 
-				; change my para
+		; change my para
     BL _ralloc         		; go to recursion
 	POP {LR}   	; bring back based on snapshot
 	;--------------------
+	MOV R0, R6
     POP {lr}             
 	BX lr
 	
