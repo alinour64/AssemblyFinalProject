@@ -3,8 +3,8 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; System Call Table
-HEAP_TOP	EQU		0x200057FF
-HEAP_BOT	EQU		0x20005000
+HEAP_TOP	EQU		0x20001000
+HEAP_BOT	EQU		0x20004FE0
 MAX_SIZE	EQU		0x00004000		; 16KB = 2^14
 MIN_SIZE	EQU		0x00000020		; 32B  = 2^5
 	
@@ -82,7 +82,7 @@ _ralloc_occupy ;; DONE ELSE OF 1ST IF
 	
 	;a - R10
 	;AND R10, b, #0X01
-	AND R10, R9, #0X01
+	AND R10, R9, #0x01
 	
 	;CMP a,#0 BECAUSE IF STATEMENT
 	CMP R10,#0
@@ -127,11 +127,11 @@ _rfree
 
 	;  short mcb_contents = *(short *)&array[ m2a( mcb_addr ) ];
 	;R3 = mcb_contents
-	LDR R3, [R0]
-	;  int mcb_offset = mcb_addr - mcb_top;
-	;R4 = mcb_offsrt
-	SUB R4, R0, R2
-	;  int mcb_chunk = ( mcb_contents /= 16 );
+	LDR R3, [R4]
+	;int mcb_offset = mcb_addr - mcb_top;
+	;R4 = mcb_offset
+	SUB R9, R4, R2
+	;int mcb_chunk = ( mcb_contents /= 16 );
 	;R5 = mcb_chunk
 	LSR R3, R3, #4
 	MOV R5, R3
@@ -140,38 +140,43 @@ _rfree
 	LSL R3, R3, #4
 	MOV R6, R3
  
-    STR R3, [R0] 
+    STR R3, [R4] 
 
-	SDIV R7, R4, R5
-	AND R7, R7, #1
-	CMP R7, #0
+	SDIV R12, R9, R5
+	AND R12, R12, #1
+	CMP R12, #0
 	BEQ equal
 	B skip
 equal 
-	ADD R7, R1, R5
+	ADD R7, R4, R5
 	LDR R8, =MCB_BOT
 	CMP R7, R8
-	BGE return_null
-	ADD R7, R0, R5
+	BGE.W return_null
+	ADD R7, R4, R5
 	;R7 = mcb_buddy
-	LDR R7, [R7]
+	LDR R11, [R7]
 	
-	
-	AND R8, R7, #1
+	AND R8, R11, #1
 	CMP R8, #0
 	
-	LSL R7, R7, #5
-	ASR R7, R7, #5
-	CMP R7, R6
+	LSL R11, R11, #5
+	ASR R11, R11, #5
+	CMP R11, R6
+	
 	BNE RFREE_RETURN
+	
+	CMP R12, #0x0
+	BEQ left_free
+	
 	;Clear my buddy
 	MOV R8, #0
-	ADD R9, R0, R5
+	ADD R9, R4, R5
 	STR R8, [R9]
 	
 	LSL R6, R6, #1;
 	;merge my buddy
-	STR R6, [R0]
+	STRH R6, [R7]
+	MOV  R4, R7
 	
 	
 		; ----------------
@@ -186,35 +191,44 @@ equal
 	
 	
 skip
-	SUB R7, R0, R5
+	SUB R7, R4, R5
 	LDR R8, =MCB_TOP
 	CMP R7, R8
 	BLT return_null
 	
-	SUB R7, R0, R5
 	;R7 = mcb_buddy
-	LDR R7, [R7]
-	AND R8, R7, #1
+	LDR R11, [R7]
+	AND R8, R11, #1
 	CMP R8, #0
 	BNE RFREE_RETURN
-	ASR R7, R7, #5
-	LSL R7, R7, #5
-	CMP R7, R6
+	ASR R11, R11, #5
+	LSL R11, R11, #5
+	CMP R11, R6
 	BNE RFREE_RETURN
+	CMP R12, #0
+	BEQ left_free
+	
 	;clear myself
-	MOV R7, #0
-	STR R7, [R0]
+	MOV R10, #0
+	STR R10, [R4]
 	
 	LSL R6, R6, #1;
 	;merge me to my buddy
-	SUB R8, R0, R5
-	STR R6, [R8]
+	STRH R6, [R7]
+	MOV  R4, R7
 	
 	; ----------------
-	PUSH {r0, r2-r12}  	; snapshot 
-	SUB R0, R0, R5						; change my para
     BL _rfree         		; go to recursion
-	POP {r0, r2-r12}   	; bring back based on snapshot
+	;--------------------
+	B RFREE_RETURN
+	
+left_free
+	STRH R8, [R7]
+	LSL  R6, R6, #1
+	STRH R6, [R4]
+
+	; ----------------
+    BL _rfree         		; go to recursion
 	;--------------------
 
 	B RFREE_RETURN

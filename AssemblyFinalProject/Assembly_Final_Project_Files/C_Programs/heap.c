@@ -185,7 +185,7 @@ int _rfree( int mcb_addr ) {
     }
   }
   else {
-    // I'm right
+    // I'm right	
     // printf( "_rfree: right\n" );
     
     if ( mcb_addr - mcb_chunk < mcb_top )

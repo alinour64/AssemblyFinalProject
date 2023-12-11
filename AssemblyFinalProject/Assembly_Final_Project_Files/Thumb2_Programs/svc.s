@@ -16,14 +16,14 @@ SYS_FREE		EQU		0x5		; address 20007B14
 _sys_exit
 	PUSH    {LR}
     BLX 	r11
-	POP    {PC}
+	POP    {LR}
 	BX LR
 	
 	IMPORT _timer_init
 _sys_alarm
     PUSH    {LR}
     BL      _timer_init
-    POP     {PC}
+    POP     {LR}
 	BX LR
 	
 	IMPORT _signal_handler
@@ -31,7 +31,7 @@ _sys_signal
 	LDR R11, = _signal_handler
     PUSH    {LR}
     BLX      R11
-    POP     {PC}
+    POP     {LR}
 	BX LR
 
 	
@@ -40,7 +40,7 @@ _sys_memcpy
 	LDR R11, = _strncpy
     PUSH    {LR}
     BLX     R11
-    POP     {PC}
+    POP     {LR}
 	BX LR
 	
 	IMPORT _kalloc
@@ -48,7 +48,7 @@ _sys_malloc
 	LDR R11, = _kalloc
     PUSH    {LR}
     BLX     R11
-    POP     {PC}
+    POP     {LR}
 	BX LR
 	
 	IMPORT _kfree
@@ -56,11 +56,12 @@ _sys_free
     LDR R11, = _kfree
     PUSH    {LR}
     BLX     R11
-    POP     {PC}
+    POP     {LR}
 	BX LR
 
 		EXPORT	_syscall_table_jump
 _syscall_table_jump
+		PUSH{LR};;;;;;;;;
 		LDR        r11, =SYSTEMCALLTBL    ; load the starting address of SYSTEMCALLTBL
         MOV        r10, r7            ; copy the system call number into r10
         LSL        r10, #0x2        ; system call number * 4, so that for malloc, it is 4, for free, it is 8
@@ -71,7 +72,8 @@ _syscall_table_jump
         BLX R1
 
         ;--------------------------------------------------
-        BX        lr                ; return to SVC_Handler                 
+        POP{LR}
+		BX        lr                ; return to SVC_Handler                 
 
 
     EXPORT	_syscall_table_init

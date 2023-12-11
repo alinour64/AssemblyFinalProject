@@ -72,7 +72,7 @@ _malloc
 	
     POP {R1-R12, LR}         
 
-    BX LR               
+    MOV PC, LR            
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; void _free( void* addr )
@@ -88,7 +88,7 @@ _free
     SVC #0x0
 	
     POP {R1-R12, LR}        
-    BX LR
+    MOV PC, LR
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; unsigned int _alarm( unsigned int seconds )
 ; Parameters
