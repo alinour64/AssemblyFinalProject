@@ -61,7 +61,7 @@ _sys_free
 
 		EXPORT	_syscall_table_jump
 _syscall_table_jump
-		LDR        r11, = SYSTEMCALLTBL    ; load the starting address of SYSTEMCALLTBL
+		LDR        r11, =SYSTEMCALLTBL    ; load the starting address of SYSTEMCALLTBL
         MOV        r10, r7            ; copy the system call number into r10
         LSL        r10, #0x2        ; system call number * 4, so that for malloc, it is 4, for free, it is 8
         ;;-------------------------------------------------

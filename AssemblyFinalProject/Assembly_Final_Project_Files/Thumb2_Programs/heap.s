@@ -35,9 +35,6 @@ _ralloc
 	LSL R7, R3, #4
 	;R8 = act_half_size
 	LSL R8, R4, #4
-
-	;;;;;
-	
 	
 
     CMP r0, r8
@@ -46,7 +43,7 @@ _ralloc
 	
 	; ----------------
 	PUSH {r0-r5, r7-r12}  	; snapshot 
-	; change my parakf
+	; change my param
 	LDR R9, =MCB_ENT_SZ
 	SUB R2, R5, R9  
     BL _ralloc         		; go to recursion
@@ -59,7 +56,7 @@ _ralloc
 	LDR R11, [R5]
 	
 	;a - R10
-	AND R10, R11, #1
+	AND R10, R11, #0x01
 	
 	CMP R10, #0
 	BEQ next
@@ -119,28 +116,32 @@ RETURN_NULLs
 	B RETURN
 	
 RETURN 
+	MOV R0, R6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	POP {LR}
 	BX LR
 
 
 	EXPORT _rfree
 _rfree
-	PUSH{R1-R9, LR}
+	PUSH{LR}
     LDR R2, = MCB_TOP
-	;mcb_addr
-    MOV R1, R0
+
 	;  short mcb_contents = *(short *)&array[ m2a( mcb_addr ) ];
-	LDRH R3, [R1]
+	;R3 = mcb_contents
+	LDR R3, [R0]
 	;  int mcb_offset = mcb_addr - mcb_top;
-	SUB R4, R1, R2
+	;R4 = mcb_offsrt
+	SUB R4, R0, R2
 	;  int mcb_chunk = ( mcb_contents /= 16 );
+	;R5 = mcb_chunk
 	LSR R3, R3, #4
 	MOV R5, R3
 	;  int my_size = ( mcb_contents *= 16 ); // clear the used bit
+	;R6 = my_size
 	LSL R3, R3, #4
 	MOV R6, R3
  
-    STRH R3, [R1] 
+    STR R3, [R0] 
 
 	SDIV R7, R4, R5
 	AND R7, R7, #1
@@ -152,70 +153,76 @@ equal
 	LDR R8, =MCB_BOT
 	CMP R7, R8
 	BGE return_null
-	ADD R7, R1, R5
-	LDRH R7, [R7]
+	ADD R7, R0, R5
+	;R7 = mcb_buddy
+	LDR R7, [R7]
 	
 	
 	AND R8, R7, #1
 	CMP R8, #0
 	
 	LSL R7, R7, #5
-	LSR R7, R7, #5
-	CMP R8, R6
+	ASR R7, R7, #5
+	CMP R7, R6
+	BNE RFREE_RETURN
 	;Clear my buddy
 	MOV R8, #0
-	ADD R9, R1, R5
-	STRH R8, [R9]
+	ADD R9, R0, R5
+	STR R8, [R9]
 	
 	LSL R6, R6, #1;
 	;merge my buddy
-	STRH R6, [R1]
+	STR R6, [R0]
 	
 	
+		; ----------------
+	PUSH {r0, r2-r12}  	; snapshot 
+							; change my para
+    BL _rfree         		; go to recursion
+	POP {r0, r2-r12}   	; bring back based on snapshot
+	;--------------------
 	
-	MOV R0, R1
-	BL _rfree
-
-RFREE_RETURN
-	POP{R1-R9, LR}
-	BX LR
+	B RFREE_RETURN
 
 	
 	
 skip
-	SUB R7, R1, R5
+	SUB R7, R0, R5
 	LDR R8, =MCB_TOP
 	CMP R7, R8
 	BLT return_null
 	
-	SUB R7, R1, R5
-	LDRH R7, [R7]
+	SUB R7, R0, R5
+	;R7 = mcb_buddy
+	LDR R7, [R7]
 	AND R8, R7, #1
 	CMP R8, #0
-	BNE DONE
+	BNE RFREE_RETURN
+	ASR R7, R7, #5
 	LSL R7, R7, #5
-	LSR R7, R7, #5
 	CMP R7, R6
-	BNE DONE
+	BNE RFREE_RETURN
 	;clear myself
 	MOV R7, #0
-	STRH R7, [R1]
+	STR R7, [R0]
 	
 	LSL R6, R6, #1;
 	;merge me to my buddy
-	SUB R8, R1, R5
-	STRH R6, [R8]
+	SUB R8, R0, R5
+	STR R6, [R8]
 	
-	
-	
-	SUB R8, R1, R5
-	MOV R0, R8
-	BL _rfree
-	B RETURN
+	; ----------------
+	PUSH {r0, r2-r12}  	; snapshot 
+	SUB R0, R0, R5						; change my para
+    BL _rfree         		; go to recursion
+	POP {r0, r2-r12}   	; bring back based on snapshot
+	;--------------------
 
-DONE
-	MOV R0, R1
-	B RETURN
+	B RFREE_RETURN
+
+RFREE_RETURN
+	POP{LR}
+	BX LR
 
 
 	EXPORT _kinit
@@ -244,12 +251,11 @@ end_init
 	EXPORT _kalloc
 _kalloc
     PUSH {lr}          
+            
 
-    MOV r4, r0             
-
-    CMP r4, #32              
+    CMP r0, #32
     BGE skip_size_adjustment 
-    MOV r4, #32        
+    MOV r0, #32
 	
 skip_size_adjustment
 
@@ -257,33 +263,30 @@ skip_size_adjustment
     LDR r2, =MCB_BOT
               
 	; ----------------
-	PUSH {r0-r5, r7-r12}  	; snapshot 
-							; change my para
+	PUSH {LR}  	; snapshot 
+		; change my para
     BL _ralloc         		; go to recursion
-	POP {r0-r5, r7-r12}   	; bring back based on snapshot
+	POP {LR}   	; bring back based on snapshot
 	;--------------------
-	
+	MOV R0, R6
     POP {lr}             
 	BX lr
 	
 	
 	EXPORT _kfree
 _kfree
-	PUSH {R1-R5, LR}
-	;addr = ptr
-	LDR R1, [R0]
-	MOV R2, #0
-    STR r2, [r1]
+	PUSH {LR}
+
 	;R2 = heap_top
 	LDR R2, =HEAP_TOP
 	;R3 = heap_bot
 	LDR R3,	=HEAP_BOT
 	
-	CMP     r1, r2      
+	CMP     r0, r2      
     BLT     return_null
 
 check_heap_bot
-    CMP     r1, r3     
+    CMP     r0, r3     
     BGT     return_null
 
 
@@ -291,26 +294,26 @@ check_heap_bot
 addr_is_valid
 
 	LDR R5, =MCB_TOP
-	SUB R4, R1, R2
+	SUB R4, R0, R2
 	LSR R4, R4, #4
 	ADD R4, R4, R5
 	
-
-	PUSH{R0}
-	MOV R0, R4
-	BL	_rfree
-	CMP R0, #0
+	; ----------------
+	PUSH {r0, r2-r12}  	; snapshot 
+							; change my para
+    BL _rfree         		; go to recursion
+	POP {r0, r2-r12}   	; bring back based on snapshot
+	;--------------------
+	CMP R6, #0
 	BEQ return_null
-	POP{R0}
-	MOV R0, R1
-	POP {R1-R5, LR};;;;;;;;;;;;;;;;;;;;;;
-    BX LR ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	MOV R0, R6
+	B KFREE_RETURN
 
 return_null
 	MOV R0, #0
 
 KFREE_RETURN
-	POP {R1-R5, LR}
+	POP {LR}
     BX LR  
 
 

@@ -65,14 +65,14 @@ _strncpy_return
 	IMPORT _kinit
 	EXPORT _malloc
 _malloc
-	PUSH {R4-R7, LR}       
+	PUSH {R1-R12, LR}       
                 
     MOV R7,#3            
     SVC #0x0
 	
-    POP {R4-R7, LR}         
+    POP {R1-R12, LR}         
 
-    MOV PC, LR                
+    BX LR               
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; void _free( void* addr )
@@ -82,13 +82,13 @@ _malloc
 ;   	none
 		EXPORT _free
 _free
-   PUSH {R4-R7, LR}       
+	PUSH {R1-R12, LR}      
                 
     MOV R7,#4             
     SVC #0x0
 	
-    POP {R4-R7, LR}       
-    MOV PC, LR  
+    POP {R1-R12, LR}        
+    BX LR
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; unsigned int _alarm( unsigned int seconds )
 ; Parameters
@@ -99,13 +99,13 @@ _free
 ;                  ed alarm. 
 		EXPORT	_alarm
 _alarm
-    PUSH {R4-R7, LR}       
+    PUSH {R1-R12, LR}         
                 
     MOV R7,#1              
     SVC #0x0
 	
-    POP {R4-R7, LR}         
-    MOV PC, LR        
+    POP {R1-R12, LR}           
+    BX LR       
 
 
 			
@@ -119,12 +119,12 @@ _alarm
 ;             (the same as the 2nd parameter in this project)
 		EXPORT _signal
 _signal
-    PUSH {R4-R7, LR}       
+    PUSH {R1-R12, LR}        
                 
     MOV R7,#2        
     SVC #0x0
-    POP {R4-R7, LR}         
-    MOV PC, LR            
+    POP {R1-R12, LR}    
+    BX LR       
 
 	
 
